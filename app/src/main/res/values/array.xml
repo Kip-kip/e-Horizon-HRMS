@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="user_type">
+        <item>Select User Type</item>
+
+    </string-array>
+
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+
+    <string-array name="job_categories">
+        <item>Full time</item>
+        <item>Contract</item>
+        <item>Part time</item>
+        <item>Volunteer</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="payment_mode">
+        <item>Payroll</item>
+        <item>Cash</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>Emergency</item>
+        <item>School fees</item>
+    </string-array>
+
+</resources>

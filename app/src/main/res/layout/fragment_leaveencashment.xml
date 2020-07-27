@@ -1,0 +1,179 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_width="match_parent"
+            android:id="@+id/layout"
+            android:orientation="vertical"
+            android:background="@color/edittextbg"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/curve_alledges_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtEventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_gravity="center"
+                    android:text="Encash leave balance"
+                    android:textSize="16sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_large">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_date_range_black_24dp"/>
+
+                    <EditText
+                        android:id="@+id/txtEName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edit_text_blue"
+                        android:fontFamily="@font/raleway_regular"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:gravity="top"
+                        android:hint="Date applied"
+                        android:padding="@dimen/spacing_middle" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_large">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_date_range_black_24dp"/>
+
+                    <EditText
+                        android:id="@+id/txtEDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edit_text_blue"
+                        android:fontFamily="@font/raleway_regular"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:gravity="top"
+                        android:hint="Days to encash"
+                        android:padding="@dimen/spacing_middle" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_large">
+
+                    <ImageView
+                        android:id="@+id/ImgStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_attach_money_black_24dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_edit_text_blue"
+                        >
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/txtMaritalStatus"
+                            android:minHeight="@dimen/_30sdp"
+                            android:entries="@array/payment_mode"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:theme="@style/spinner"
+                            android:layout_height="wrap_content">
+
+                        </Spinner>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_large">
+
+                    <ImageView
+                        android:id="@+id/ImgStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_info_outline_black_24dp"/>
+
+
+                    <EditText
+                        android:id="@+id/txtTaskDescription"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_70sdp"
+                        android:fontFamily="@font/raleway_regular"
+                        android:lines="8"
+                        android:hint="Reason(s)"
+                        android:textColor="@color/black"
+                        android:inputType="text|textMultiLine"
+                        android:background="@color/edittextbg"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="top" />
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:id="@+id/btnSubmit"
+                    android:textSize="@dimen/_12sdp"
+                    android:background="@drawable/bg_btn_round_darkblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Encash"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+</FrameLayout>
