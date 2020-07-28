@@ -13,15 +13,16 @@
         android:layout_width="fill_parent"
         android:layout_height="0.0dip"
         app:elevation="0.0dip"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_toolbar"
             android:fitsSystemWindows="true"
+            android:paddingBottom="@dimen/_5sdp"
             android:layout_width="fill_parent"
-
+            android:background="@color/colorPrimaryDark"
             android:layout_height="wrap_content"
             android:minHeight="?actionBarSize"
             >
@@ -83,30 +84,891 @@
 
 
         </androidx.appcompat.widget.Toolbar>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_main"
-            style="@style/CustomTabLayout"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="left"
-            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/white"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+
+
+            <LinearLayout
+                android:id="@+id/llexpected"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:weightSum="100">
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="33">
+                    <Button
+                        android:id="@+id/btnapplication"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@drawable/bg_btn_round_primary"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="Application"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="33">
+
+                    <Button
+                        android:id="@+id/btnencashment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@drawable/bg_btn_round_primary"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="Encashment"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="33">
+
+                    <Button
+                        android:id="@+id/btnhistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@drawable/bg_btn_round_primary"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="History"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
+<!--    LEAVE APPLICATION-->
 
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_main"
+    <LinearLayout
+        android:layout_marginTop="@dimen/_100sdp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:id="@+id/llapplication"
+        android:orientation="vertical"
+        android:background="@color/edittextbg"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+>
+        <TextView
+            android:id="@+id/txtEventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:fontFamily="@font/raleway_regular"
+            android:layout_gravity="left"
+            android:text="Select Leave Type"
+            android:textSize="16sp" />
+
+        <HorizontalScrollView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/curve_alledges_green">
 
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_gravity="center"
+                            android:text="Annual Leave"
+                            android:textSize="15sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/summer"
+                            android:translationZ="2dp"
+                            android:background="@drawable/shadoww"
+                            app:civ_border_color="@color/leavecardbgcolor"
+                            app:civ_border_width="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtEventDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Entitled: 50"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/txtEventDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Balance: 19"
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/curve_alledges_red">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_gravity="center"
+                            android:text="Sick Leave"
+                            android:textSize="15sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/headache"
+                            android:translationZ="2dp"
+                            app:civ_border_color="@color/leavecardbgcolor"
+                            app:civ_border_width="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtEventDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Entitled: 50"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/txtEventDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Balance: 19"
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/curve_alledges_pink">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_gravity="center"
+                            android:text="Compassionate"
+                            android:textSize="15sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/hug"
+                            android:background="@drawable/shadoww"
+                            android:translationZ="2dp"
+                            app:civ_border_color="@color/leavecardbgcolor"
+                            app:civ_border_width="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtEventDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Entitled: 50"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/txtEventDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Balance: 19"
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/curve_alledges_yellow">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_gravity="center"
+                            android:text="Paternity Leave"
+                            android:textSize="15sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pregnancy"
+                            android:translationZ="2dp"
+                            android:background="@drawable/shadoww"
+                            app:civ_border_color="@color/leavecardbgcolor"
+                            app:civ_border_width="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtEventDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Entitled: 50"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/txtEventDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Balance: 19"
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/curve_alledges_blue">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        >
+
+
+
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:layout_gravity="center"
+                            android:text="Maternity Leave"
+                            android:textSize="15sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pregnant"
+                            android:background="@drawable/shadoww"
+                            android:translationZ="2dp"
+                            app:civ_border_color="@color/leavecardbgcolor"
+                            app:civ_border_width="0dp" />
+
+
+                        <TextView
+                            android:id="@+id/txtEventDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Entitled: 50"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/txtEventDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textColor="@color/grey_900"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="Balance: 19"
+                            android:textSize="14sp" />
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/curve_alledges_white"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/clock"/>
+
+                    <TextView
+                        android:id="@+id/txtEventName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="From"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="fill_parent"
+                    android:background="@color/greyy_500" />
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/speed"/>
+
+                    <TextView
+                        android:id="@+id/txtEventName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="To"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/txtTaskDescription"
+                android:textSize="@dimen/_12sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/raleway_regular"
+                android:lines="8"
+                android:hint="Reason(s)"
+                android:textColor="@color/black"
+                android:inputType="text|textMultiLine"
+                android:background="@color/edittextbg"
+                android:layout_margin="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
+                android:gravity="top" />
+
+            <Button
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:id="@+id/btnSubmit"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_round_darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Apply"
+                android:fontFamily="@font/raleway_regular"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+<!--    LEAVE ENCASHMENT-->
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_width="match_parent"
+        android:id="@+id/llencashment"
+        android:orientation="vertical"
+        android:background="@color/edittextbg"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/curve_alledges_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:layout_gravity="center"
+                android:text="Encash leave balance"
+                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_date_range_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/txtEName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="top"
+                    android:hint="Date applied"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_date_range_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/txtEDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="top"
+                    android:hint="Days to encash"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+
+                <ImageView
+                    android:id="@+id/ImgStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_attach_money_black_24dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    >
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/txtMaritalStatus"
+                        android:minHeight="@dimen/_30sdp"
+                        android:entries="@array/payment_mode"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:theme="@style/spinner"
+                        android:layout_height="wrap_content">
+
+                    </Spinner>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+
+                <ImageView
+                    android:id="@+id/ImgStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_info_outline_black_24dp"/>
+
+
+                <EditText
+                    android:id="@+id/txtTaskDescription"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:fontFamily="@font/raleway_regular"
+                    android:lines="8"
+                    android:hint="Reason(s)"
+                    android:textColor="@color/black"
+                    android:inputType="text|textMultiLine"
+                    android:background="@color/edittextbg"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:gravity="top" />
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:id="@+id/btnSubmit"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/bg_btn_round_darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Encash"
+                android:fontFamily="@font/raleway_regular"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+<!--LEAVE APPLICATION HISTORY-->
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_width="match_parent"
+        android:id="@+id/llhistory"
+        android:orientation="vertical"
+        android:background="@color/edittextbg"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+            <TableRow
+                android:background="@color/colorPrimaryDark"
+                android:padding="5dp"
+                android:fontFamily="@font/raleway_regular"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_weight="1"
+                    android:text="Name" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:text="Requested On" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Status" />
+            </TableRow>
+            <TableRow
+                android:background="@color/white"
+                android:padding="5dp"
+                android:id="@+id/gotohistoryitem">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Annual leave" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="19/03/2020" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Pending" />
+            </TableRow>
+            <TableRow
+                android:background="@color/white"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Sick leave" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_weight="1"
+                    android:text="14/03/2020" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Approved" />
+            </TableRow>
+
+            <TableRow
+                android:background="@color/white"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Paternity leave" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_weight="1"
+                    android:text="21/03/2020" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Rejected" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

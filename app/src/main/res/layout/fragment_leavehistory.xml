@@ -47,7 +47,7 @@
             <TableRow
                 android:background="@color/white"
                 android:padding="5dp"
-                android:id="@+id/gotoitem">
+                android:id="@+id/gotohistoryitm">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
