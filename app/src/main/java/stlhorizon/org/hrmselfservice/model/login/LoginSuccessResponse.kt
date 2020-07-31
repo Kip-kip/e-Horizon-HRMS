@@ -14,6 +14,11 @@ class LoginSuccessResponse : Response() {
     @Expose
     var title: String? = null
 
+    override fun toString(): String {
+        val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
+        return gsonBuilder.create().toJson(this)
+    }
+
     companion object {
         fun createLoginSuccessResponseFrom(message: String?): LoginSuccessResponse {
             val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()

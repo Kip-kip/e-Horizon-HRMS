@@ -750,4 +750,65 @@ public class NetworkConnection {
 
     }
 
+
+//    ADDED FOR FORM MULTIPART
+
+    public static void makeAPostRequestFormData(String url, final JSONObject mbody, JSONObject headers, final OnReceivingResult receivingResult) {
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MultipartBody.Builder bodyBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+
+        if(mbody!=null) {
+            Iterator<String> keys = mbody.keys();
+            while (keys.hasNext()) {
+                String ourkey = keys.next();
+                try {
+                    bodyBuilder.addFormDataPart(ourkey, mbody.getString(ourkey));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+        RequestBody body= bodyBuilder .build();
+        Request.Builder builder = new Request.Builder()
+                .url(url)
+                .method("POST", body);
+
+
+        if(headers!=null) {
+            Iterator<String> keys = headers.keys();
+            builder .addHeader("Content-Type", "multipart/form-data");
+            while (keys.hasNext()) {
+                String ourkey = keys.next();
+                try {
+                    builder.addHeader(ourkey, headers.getString(ourkey));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        client.newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                receivingResult.onErrorResult(e);
+
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                seriesRouter(response,receivingResult);
+
+
+            }
+        });
+
+    }
+
+
 }
