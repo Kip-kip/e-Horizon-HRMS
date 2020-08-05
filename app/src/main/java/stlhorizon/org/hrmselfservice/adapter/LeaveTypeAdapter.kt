@@ -49,7 +49,6 @@ public class LeaveTypeAdapter(
         }
 
         //style TextView
-
         holder.txtLeaveName.setTextSize(11F);
 
     }
