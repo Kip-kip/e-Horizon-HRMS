@@ -1,0 +1,44 @@
+<TableRow
+    android:background="@color/grey_5"
+    android:paddingTop="@dimen/_15sdp"
+    android:paddingBottom="@dimen/_15sdp"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
+    android:id="@+id/table_row"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/txtTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:maxWidth="@dimen/_100sdp"
+        android:ellipsize="marquee"
+        android:paddingRight="@dimen/_10sdp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="Inhouse onboarding" />
+    <TextView
+        android:id="@+id/txtSDate"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/raleway_regular"
+        android:paddingRight="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="20-09-2019" />
+    <TextView
+        android:id="@+id/txtEDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:fontFamily="@font/raleway_regular"
+        android:text="08:00-10:00" />
+
+    <View android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
+        android:layout_height="5dp"/>
+</TableRow>

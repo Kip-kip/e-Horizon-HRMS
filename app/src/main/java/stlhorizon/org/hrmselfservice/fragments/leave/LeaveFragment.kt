@@ -6,28 +6,35 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TableRow
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_leave.*
+import kotlinx.android.synthetic.main.fragment_leavehistory.*
+import kotlinx.android.synthetic.main.leavehistory_list_item.*
+import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
 import org.json.JSONException
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
 import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
+import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 
 class LeaveFragment : Fragment() {
 
     private var leaveTypeRecyclerView: RecyclerView? = null
     private var leaveTypeAdapter: LeaveTypeAdapter? = null
+    private var txtTask: TextView? = null
+    private  var txtSDate:TextView? = null
+    private  var txtEDate:TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +55,7 @@ class LeaveFragment : Fragment() {
         val llencashment = root.findViewById<LinearLayout>(R.id.llencashment)
         val llhistory = root.findViewById<LinearLayout>(R.id.llhistory)
 
-        val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
+        //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
 
         leaveTypeRecyclerView = root.findViewById<RecyclerView>(R.id.leavetyperecyclerView)
 
@@ -56,39 +63,36 @@ class LeaveFragment : Fragment() {
         btnapplication.setOnClickListener {
             llapplication.visibility = View.VISIBLE
             llhistory.visibility = View.GONE
-            llencashment.visibility=View.GONE
+            llencashment.visibility = View.GONE
         }
 
         //encashment button clicked--hide history and application
         btnencashment.setOnClickListener {
             llapplication.visibility = View.GONE
             llhistory.visibility = View.GONE
-            llencashment.visibility=View.VISIBLE
+            llencashment.visibility = View.VISIBLE
         }
 
         //history button clicked--hide application and encashment
         btnhistory.setOnClickListener {
             llapplication.visibility = View.GONE
             llhistory.visibility = View.VISIBLE
-            llencashment.visibility=View.GONE
+            llencashment.visibility = View.GONE
         }
 
         //go to history item
-        gotohistoryitem.setOnClickListener {
-            val intent = Intent(context, LeaveItemActivity::class.java)
-            startActivity(intent)
-        }
-
-        val horizontalLayoutManagaer =
+//        gotohistoryitem.setOnClickListener {
+//            val intent = Intent(context, LeaveItemActivity::class.java)
+//            startActivity(intent)
+//        }
 
 
         loadLeaveType()
 
-
+        loadLeaveHistory()
 
         return root
     }
-
 
 
     fun loadLeaveType() {
@@ -111,14 +115,23 @@ class LeaveFragment : Fragment() {
                     val response = remoteResponse.messangeAsJSON
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val leaveTypes: LeaveTypes = LeaveTypes.createLeaveTypesFrom(remoteResponse.message)
-                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> = leaveTypes.leaveTypesData!!
+                            val leaveTypes: LeaveTypes =
+                                LeaveTypes.createLeaveTypesFrom(remoteResponse.message)
+                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> =
+                                leaveTypes.leaveTypesData!!
 
                             Toast.makeText(context, "wabe", Toast.LENGTH_SHORT).show()
 
-                            leaveTypeAdapter = context?.let { LeaveTypeAdapter(it, leaveTypesModel) }
+                            leaveTypeAdapter =
+                                context?.let { LeaveTypeAdapter(it, leaveTypesModel) }
                             leaveTypeRecyclerView?.setAdapter(leaveTypeAdapter)
-                            leaveTypeRecyclerView?.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+                            leaveTypeRecyclerView?.setLayoutManager(
+                                LinearLayoutManager(
+                                    context,
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
+                            )
 
                             return
                         } else {
@@ -134,7 +147,126 @@ class LeaveFragment : Fragment() {
                 override fun onAnyEvent() {}
             })
     }
+//
+//
+//    fun loadLeaveHistory() {
+//        Toast.makeText(context, "wabe", Toast.LENGTH_LONG).show()
+//
+//        val token =
+//            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+//
+//        NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token", null, object : OnReceivingResult {
+//                override fun onErrorResult(e: IOException) {
+//                    e.printStackTrace()
+//                    Log.e("error", e.message)
+//                }
+//
+//                override fun onReceiving100SeriesResponse(remoteResponse: RemoteResponse?) {}
+//                override fun onReceiving200SeriesResponse(remoteResponse: RemoteResponse) {
+//                    NetworkConnection.remoteResponseLogger(remoteResponse)
+//                    val response = remoteResponse.messangeAsJSON
+//                    try {
+//                        if (response.getString("success").equals("1", ignoreCase = true)) {
+//
+//                            Toast.makeText(context, "wabe", Toast.LENGTH_SHORT).show()
+//
+//
+//
+//                            return
+//                        } else {
+//                        }
+//                    } catch (e: JSONException) {
+//                        e.printStackTrace()
+//                    }
+//                }
+//
+//                override fun onReceiving300SeriesResponse(remoteResponse: RemoteResponse?) {}
+//                override fun onReceiving400SeriesResponse(remoteResponse: RemoteResponse?) {}
+//                override fun onReceiving500SeriesResponse(remoteResponse: RemoteResponse?) {}
+//                override fun onAnyEvent() {}
+//            })
+//    }
 
 
+     fun loadLeaveHistory() {
+         val token =
+             "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+
+         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token", null, object :
+             OnReceivingResult {
+                override fun onErrorResult(e: IOException) {
+                    e.printStackTrace()
+                }
+
+                override fun onReceiving100SeriesResponse(remoteResponse: RemoteResponse?) {
+                    NetworkConnection.remoteResponseLogger(remoteResponse)
+                }
+
+                override fun onReceiving200SeriesResponse(remoteResponse: RemoteResponse) {
+                    //  NetworkConnection.remoteResponseLogger(remoteResponse);
+                    val response = remoteResponse.messangeAsJSON
+                    try {
+                        if (response.getString("success").equals("1", ignoreCase = true)) {
+                            val leavehistory: LeaveHistory? = LeaveHistory.createLeaveHistoryFrom(remoteResponse.message)
+                            if (leavehistory != null) {
+                                if (leavehistory.isAResponseASuccess) {
+                                    for (leavehistorymodel in leavehistory.leaveHistoryData!!) {
+                                        tab_layout.addView(
+                                            this@LeaveFragment.populateTableLeaveHistory(
+                                                leavehistorymodel
+                                            )
+                                        )
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "" + leavehistory.success,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+
+
+
+                            return
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onReceiving300SeriesResponse(remoteResponse: RemoteResponse?) {
+                    NetworkConnection.remoteResponseLogger(remoteResponse)
+                }
+
+                override fun onReceiving400SeriesResponse(remoteResponse: RemoteResponse?) {
+                    NetworkConnection.remoteResponseLogger(remoteResponse)
+                }
+
+                override fun onReceiving500SeriesResponse(remoteResponse: RemoteResponse?) {
+                    NetworkConnection.remoteResponseLogger(remoteResponse)
+                }
+
+                override fun onAnyEvent() {}
+            })
+    }
+
+
+    private fun populateTableLeaveHistory(leaveHistoryModel: LeaveHistory.LeaveHistoryModel): TableRow? {
+        val view = view
+        val tableRow = LayoutInflater.from(context).inflate(R.layout.leavehistory_list_item, null, false) as TableRow
+       // txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
+        txtSDate = tableRow.findViewById<TextView>(R.id.txtSDate)
+        txtEDate = tableRow.findViewById<TextView>(R.id.txtEDate)
+        tableRow.txtTask.setText(leaveHistoryModel.leave_name)
+
+//
+//        tableRow.setOnClickListener(
+//            stlhorizon.org.uniscoo.Fragments.TimesheetsFragment.TaskClickEvent(
+//                taskModel
+//            )
+//        )
+        return tableRow
+    }
 
 }

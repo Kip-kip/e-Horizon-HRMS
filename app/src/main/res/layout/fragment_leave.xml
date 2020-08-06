@@ -516,109 +516,119 @@
         android:background="@color/edittextbg"
         android:layout_height="match_parent">
 
-        <TableLayout
-            android:layout_width="match_parent"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-            <TableRow
-                android:background="@color/colorPrimaryDark"
-                android:padding="5dp"
-                android:fontFamily="@font/raleway_regular"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/raleway_regular"
-                    android:layout_weight="1"
-                    android:text="Name" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_regular"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:text="Requested On" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Status" />
-            </TableRow>
-            <TableRow
-                android:background="@color/white"
-                android:padding="5dp"
-                android:id="@+id/gotohistoryitem">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Annual leave" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="19/03/2020" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Pending" />
-            </TableRow>
-            <TableRow
-                android:background="@color/white"
-                android:padding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Sick leave" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_regular"
-                    android:layout_weight="1"
-                    android:text="14/03/2020" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Approved" />
-            </TableRow>
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
 
-            <TableRow
+            <ScrollView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
                 android:background="@color/white"
-                android:padding="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Paternity leave" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_regular"
-                    android:layout_weight="1"
-                    android:text="21/03/2020" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/raleway_regular"
-                    android:text="Rejected" />
-            </TableRow>
-        </TableLayout>
+                android:layout_marginTop="@dimen/_50sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" >
 
+
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white"
+                    android:fitsSystemWindows="true"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
+
+
+
+                        <!--<HorizontalScrollView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:scrollbars="vertical"-->
+                        <!---->
+                        <!--android:scrollbarStyle="outsideOverlay"-->
+                        <!--android:layout_height="match_parent">-->
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TableLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+                                android:layout_marginTop="10dp"
+                                android:paddingLeft="10dp"
+                                android:id="@+id/tab_layout"
+                                android:paddingRight="10dp" >
+
+
+                                <TableRow
+                                    android:background="@color/colorPrimaryDark"
+                                    android:padding="5dp">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/raleway_regular"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/white"
+                                        android:text="Name" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/raleway_regular"
+                                        android:textColor="@color/white"
+                                        android:layout_weight="1"
+                                        android:text="Applied on" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/raleway_regular"
+                                        android:textColor="@color/white"
+                                        android:text="Status" />
+
+                                    <!--<TextView-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_weight="1"-->
+                                    <!--android:textColor="@color/black"-->
+                                    <!--android:fontFamily="@font/raleway_regular"-->
+                                    <!--android:text="Hours" />-->
+
+                                </TableRow>
+                            </TableLayout>
+                        </FrameLayout>
+
+
+
+
+
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 
