@@ -7,12 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
-import kotlinx.android.synthetic.main.fragment_leavehistory.*
-import kotlinx.android.synthetic.main.leavehistory_list_item.*
 import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
 import org.json.JSONException
 import stlhorizon.org.hrmselfservice.R
@@ -24,8 +23,8 @@ import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
-import java.text.ParseException
-import java.text.SimpleDateFormat
+import java.security.AccessControlContext
+import java.security.AccessController.getContext
 
 
 class LeaveFragment : Fragment() {
@@ -80,11 +79,12 @@ class LeaveFragment : Fragment() {
             llencashment.visibility = View.GONE
         }
 
-        //go to history item
+      //  go to history item
 //        gotohistoryitem.setOnClickListener {
 //            val intent = Intent(context, LeaveItemActivity::class.java)
 //            startActivity(intent)
 //        }
+
 
 
         loadLeaveType()
@@ -96,7 +96,6 @@ class LeaveFragment : Fragment() {
 
 
     fun loadLeaveType() {
-        Toast.makeText(context, "wabe", Toast.LENGTH_LONG).show()
 
         val token =
             "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
@@ -260,13 +259,42 @@ class LeaveFragment : Fragment() {
         txtEDate = tableRow.findViewById<TextView>(R.id.txtEDate)
         tableRow.txtTask.setText(leaveHistoryModel.leave_name)
 
-//
-//        tableRow.setOnClickListener(
-//            stlhorizon.org.uniscoo.Fragments.TimesheetsFragment.TaskClickEvent(
-//                taskModel
-//            )
-//        )
+
+        tableRow.setOnClickListener(
+            HistoryClickEvent(
+                leaveHistoryModel
+            )
+        )
         return tableRow
+
     }
+
+
+    internal class HistoryClickEvent(leaveHistoryModel: LeaveHistory.LeaveHistoryModel) :
+        View.OnClickListener {
+        private var leaveHistoryModel: LeaveHistory.LeaveHistoryModel? = null
+
+
+        fun HistoryClickEvent(leaveHistoryModel: LeaveHistory.LeaveHistoryModel?) {
+            this.leaveHistoryModel = leaveHistoryModel
+
+        }
+
+        override fun onClick(view: View) {
+
+            //val intent = Intent(getContext(), LeaveItemActivity::class.java)
+
+        }
+
+        init {
+            this.leaveHistoryModel = leaveHistoryModel
+        }
+    }
+
+
+
+
+
+
 
 }
