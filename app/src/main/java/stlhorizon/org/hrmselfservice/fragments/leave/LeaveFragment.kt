@@ -281,10 +281,9 @@ class LeaveFragment : Fragment() {
         }
 
         override fun onClick(view: View) {
-
             //val intent = Intent(getContext(), LeaveItemActivity::class.java)
-
         }
+
 
         init {
             this.leaveHistoryModel = leaveHistoryModel
