@@ -227,6 +227,18 @@
             android:background="@drawable/curve_alledges_white"
             android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/txtLeaveId"
+                android:textSize="@dimen/_12sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/raleway_regular"
+                android:hint="From"
+                android:textColor="@color/black"
+                android:background="@color/edittextbg"
+                android:layout_margin="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
+                android:gravity="top" />
 
 
 
@@ -236,6 +248,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
                 >
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -259,6 +272,19 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="From"
                         android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/txtFrom"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/raleway_regular"
+                        android:hint="From"
+                        android:textColor="@color/black"
+                        android:background="@color/edittextbg"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="top" />
 
                 </LinearLayout>
 
@@ -292,6 +318,18 @@
                         android:fontFamily="@font/raleway_regular"
                         android:text="To"
                         android:textSize="16sp" />
+                    <EditText
+                        android:id="@+id/txtTo"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/raleway_regular"
+                        android:hint="To"
+                        android:textColor="@color/black"
+                        android:background="@color/edittextbg"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="top" />
 
                 </LinearLayout>
 
@@ -299,7 +337,7 @@
 
 
             <EditText
-                android:id="@+id/txtTaskDescription"
+                android:id="@+id/txtReason"
                 android:textSize="@dimen/_12sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -316,7 +354,7 @@
             <Button
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:id="@+id/btnSubmit"
+                android:id="@+id/btnApply"
                 android:textSize="@dimen/_12sdp"
                 android:background="@drawable/bg_btn_round_darkblue"
                 android:layout_width="match_parent"

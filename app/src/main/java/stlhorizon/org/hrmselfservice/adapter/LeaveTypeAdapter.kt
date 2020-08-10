@@ -1,9 +1,11 @@
 package stlhorizon.org.hrmselfservice.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +53,12 @@ public class LeaveTypeAdapter(
         //style TextView
         holder.txtLeaveName.setTextSize(11F);
 
+
+        holder.itemView.setOnClickListener {
+          holder.edtLeaveId.setText(leavetypeModel.leave_id)
+        }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -60,10 +68,12 @@ public class LeaveTypeAdapter(
     inner class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var txtLeaveName: TextView
-        lateinit var llCardBody: LinearLayout
+        var edtLeaveId: EditText
+        var llCardBody: LinearLayout
 
         init {
             txtLeaveName = itemView.findViewById(R.id.txtLeaveName)
+            edtLeaveId = itemView.findViewById(R.id.txtLeaveId)
             llCardBody = itemView.findViewById(R.id.cardbody)
 
         }
