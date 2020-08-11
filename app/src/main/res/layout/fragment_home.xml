@@ -464,7 +464,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/toffers"
+                        android:id="@+id/totraining"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"

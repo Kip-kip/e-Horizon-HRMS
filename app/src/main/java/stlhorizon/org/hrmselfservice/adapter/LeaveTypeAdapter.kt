@@ -1,11 +1,10 @@
 package stlhorizon.org.hrmselfservice.adapter
 
 import android.content.Context
-import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +15,8 @@ import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 
 public class LeaveTypeAdapter(
     var context: Context,
+
+
     dataModelArrayList: List<LeaveTypes.LeaveTypesModel>
 ) :
     RecyclerView.Adapter<MyViewHolder>() {
@@ -33,6 +34,7 @@ public class LeaveTypeAdapter(
         holder: MyViewHolder,
         position: Int
     ) {
+
         val leavetypeModel: LeaveTypes.LeaveTypesModel = dataModelArrayListUsertypes[position]
         holder.txtLeaveName.setText(leavetypeModel.leave_name)
 
@@ -55,7 +57,19 @@ public class LeaveTypeAdapter(
 
 
         holder.itemView.setOnClickListener {
-          holder.edtLeaveId.setText(leavetypeModel.leave_id)
+
+            // skip code request if already requested
+            val preferences: SharedPreferences
+            val MY_SHARED_PREFERENCES = "CodeRequestPref"
+            preferences = context.getSharedPreferences(
+                MY_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+            val editor = preferences.edit()
+            editor.putString("SKIP_CODE_REQUEST", leavetypeModel.leave_id)
+            editor.commit()
+
+
         }
 
 
@@ -68,12 +82,10 @@ public class LeaveTypeAdapter(
     inner class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var txtLeaveName: TextView
-        var edtLeaveId: EditText
         var llCardBody: LinearLayout
 
         init {
             txtLeaveName = itemView.findViewById(R.id.txtLeaveName)
-            edtLeaveId = itemView.findViewById(R.id.txtLeaveId)
             llCardBody = itemView.findViewById(R.id.cardbody)
 
         }

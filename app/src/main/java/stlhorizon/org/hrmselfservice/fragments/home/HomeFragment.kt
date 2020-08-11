@@ -13,6 +13,7 @@ import stlhorizon.org.hrmselfservice.fragments.dashboard.PayslipFragment
 import stlhorizon.org.hrmselfservice.fragments.dashboard.ProfileFragment
 import stlhorizon.org.hrmselfservice.fragments.loan.DocsFragment
 import stlhorizon.org.hrmselfservice.fragments.loan.LoanFragment
+import stlhorizon.org.hrmselfservice.fragments.training.TrainingFragment
 
 class HomeFragment : Fragment() {
 
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
         val approvalscard = root.findViewById<LinearLayout>(R.id.toapprovals)
         val loanscard = root.findViewById<LinearLayout>(R.id.toloan)
         val docscard = root.findViewById<LinearLayout>(R.id.todocs)
+        val trainingcard = root.findViewById<LinearLayout>(R.id.totraining)
         //to profile
         profilesection.setOnClickListener {
             replaceFragment(ProfileFragment())
@@ -51,6 +53,9 @@ class HomeFragment : Fragment() {
         }
         docscard.setOnClickListener {
             replaceFragment(DocsFragment())
+        }
+        trainingcard.setOnClickListener {
+                replaceFragment(TrainingFragment())
         }
 
         return root

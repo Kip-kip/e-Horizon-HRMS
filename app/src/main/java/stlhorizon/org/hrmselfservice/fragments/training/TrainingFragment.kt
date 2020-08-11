@@ -1,7 +1,6 @@
-package stlhorizon.org.hrmselfservice.fragments.dashboard
+package stlhorizon.org.hrmselfservice.fragments.training
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +27,7 @@ import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
 
 
-class LeaveFragment : Fragment() {
+class TrainingFragment : Fragment() {
 
     private var leaveTypeRecyclerView: RecyclerView? = null
     private var leaveTypeAdapter: LeaveTypeAdapter? = null
@@ -36,63 +35,49 @@ class LeaveFragment : Fragment() {
     private  var txtSDate:TextView? = null
     private  var txtEDate:TextView? = null
 
-    private var txtFrom: TextView? = null
-    private  var txtTo:TextView? = null
-    private  var txtReason:TextView? = null
-     var myGlobalString = "initial_value"
-
+    private var txtTrainingFrom: TextView? = null
+    private  var txtTrainingTo:TextView? = null
+    private  var txtTrainingReason:TextView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_leave, container, false)
+        val root = inflater.inflate(R.layout.fragment_training, container, false)
 //        val tabLayout = root.findViewById(R.id.tabs_main) as TabLayout
 //        val viewPager = root.findViewById(R.id.viewpager_main) as ViewPager
 //        viewPager.setAdapter(fragmentManager?.let { MyPagerAdapter(it) })
 //        tabLayout!!.post(Runnable { tabLayout!!.setupWithViewPager(viewPager) })
 
-        val btnapplication = root.findViewById<Button>(R.id.btnapplication)
-        val btnencashment = root.findViewById<Button>(R.id.btnencashment)
-        val btnhistory = root.findViewById<Button>(R.id.btnhistory)
-        val btnapply = root.findViewById<Button>(R.id.btnApply)
+        val btntrainingrequest = root.findViewById<Button>(R.id.btntrainingrequest)
+        val btntraininghistory = root.findViewById<Button>(R.id.btntraininghistory)
+        val btnRequest = root.findViewById<Button>(R.id.btnRequest)
 
-        val llapplication = root.findViewById<LinearLayout>(R.id.llapplication)
-        val llencashment = root.findViewById<LinearLayout>(R.id.llencashment)
-        val llhistory = root.findViewById<LinearLayout>(R.id.llhistory)
+        val lltrainingrequest = root.findViewById<LinearLayout>(R.id.lltrainingrequest)
+        val lltraininghistory = root.findViewById<LinearLayout>(R.id.lltraininghistory)
 
-        txtFrom=root.findViewById(R.id.txtFrom)
-        txtTo=root.findViewById(R.id.txtTo)
-        txtReason=root.findViewById(R.id.txtReason)
+        txtTrainingFrom=root.findViewById(R.id.txtTrainingFrom)
+        txtTrainingTo=root.findViewById(R.id.txtTrainingTo)
+        txtTrainingReason=root.findViewById(R.id.txtTrainingReason)
 
         //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
 
-        leaveTypeRecyclerView = root.findViewById<RecyclerView>(R.id.leavetyperecyclerView)
+      //  leaveTypeRecyclerView = root.findViewById<RecyclerView>(R.id.leavetyperecyclerView)
 
         //application button clicked--hide history and encashment
-        btnapplication.setOnClickListener {
-            llapplication.visibility = View.VISIBLE
-            llhistory.visibility = View.GONE
-            llencashment.visibility = View.GONE
+        btntrainingrequest.setOnClickListener {
+            lltrainingrequest.visibility = View.VISIBLE
+            lltraininghistory.visibility = View.GONE
         }
-
-        //encashment button clicked--hide history and application
-        btnencashment.setOnClickListener {
-            llapplication.visibility = View.GONE
-            llhistory.visibility = View.GONE
-            llencashment.visibility = View.VISIBLE
-        }
-
         //history button clicked--hide application and encashment
-        btnhistory.setOnClickListener {
-            llapplication.visibility = View.GONE
-            llhistory.visibility = View.VISIBLE
-            llencashment.visibility = View.GONE
+        btntraininghistory.setOnClickListener {
+            lltrainingrequest.visibility = View.GONE
+            lltraininghistory.visibility = View.VISIBLE
         }
 
         //Apply for leave
-        btnapply.setOnClickListener {
-           applyForLeave()
+        btnRequest.setOnClickListener {
+           //applyForLeave()
         }
 
       //  go to history item
@@ -228,7 +213,7 @@ class LeaveFragment : Fragment() {
                                 if (leavehistory.isAResponseASuccess) {
                                     for (leavehistorymodel in leavehistory.leaveHistoryData!!) {
                                         tab_layout.addView(
-                                            this@LeaveFragment.populateTableLeaveHistory(
+                                            this@TrainingFragment.populateTableLeaveHistory(
                                                 leavehistorymodel
                                             )
                                         )
