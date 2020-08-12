@@ -104,6 +104,7 @@ class TrainingFragment : Fragment() {
             object : OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
                     e.printStackTrace()
+
                     Log.e("error", e.message)
                 }
 
