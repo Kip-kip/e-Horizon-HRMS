@@ -244,12 +244,13 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/imgLeaveFrom"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:src="@drawable/clock"/>
 
                     <TextView
-                        android:id="@+id/txtEventName"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -260,14 +261,14 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/txtFrom"
+                        android:id="@+id/txtLeaveFrom"
                         android:textSize="@dimen/_12sdp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/raleway_regular"
-                        android:hint="From"
+                        android:hint=""
+                        android:background="@null"
                         android:textColor="@color/black"
-                        android:background="@color/edittextbg"
                         android:layout_margin="@dimen/_10sdp"
                         android:padding="@dimen/_5sdp"
                         android:gravity="top" />
@@ -290,6 +291,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/imgLeaveTo"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:src="@drawable/speed"/>
@@ -305,15 +307,15 @@
                         android:text="To"
                         android:textSize="16sp" />
                     <EditText
-                        android:id="@+id/txtTo"
+                        android:id="@+id/txtLeaveTo"
                         android:textSize="@dimen/_12sdp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/raleway_regular"
-                        android:hint="To"
+                        android:hint=""
                         android:textColor="@color/black"
-                        android:background="@color/edittextbg"
                         android:layout_margin="@dimen/_10sdp"
+                        android:background="@null"
                         android:padding="@dimen/_5sdp"
                         android:gravity="top" />
 
@@ -545,7 +547,6 @@
             android:id="@+id/pullToRefresh"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_50sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -45,16 +45,16 @@ public class TrainingCoursesAdapter(
 
         holder.itemView.setOnClickListener {
 
-//            // skip code request if already requested
-//            val preferences: SharedPreferences
-//            val MY_SHARED_PREFERENCES = "CodeRequestPref"
-//            preferences = context.getSharedPreferences(
-//                MY_SHARED_PREFERENCES,
-//                Context.MODE_PRIVATE
-//            )
-//            val editor = preferences.edit()
-//            editor.putString("SKIP_CODE_REQUEST", leavetypeModel.leave_id)
-//            editor.commit()
+            // skip code request if already requested
+            val preferences: SharedPreferences
+            val MY_SHARED_PREFERENCES = "CourseID"
+            preferences = context.getSharedPreferences(
+                MY_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            )
+            val editor = preferences.edit()
+            editor.putString("COURSE_ID", trainingCoursesModel.id)
+            editor.commit()
 
 
         }

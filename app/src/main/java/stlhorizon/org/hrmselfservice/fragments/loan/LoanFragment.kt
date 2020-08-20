@@ -6,17 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TableRow
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import stlhorizon.org.hrmselfservice.R
-import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
 import stlhorizon.org.hrmselfservice.activities.Leave.LoanItemActivity
-import stlhorizon.org.hrmselfservice.activities.Leave.LoanRequestActivity
-import stlhorizon.org.hrmselfservice.activities.Payslip.ApprovalsItemActivity
-import stlhorizon.org.hrmselfservice.activities.Payslip.GroupChatItemActivity
-import stlhorizon.org.hrmselfservice.activities.Payslip.SingleChatItemActivity
+import stlhorizon.org.hrmselfservice.activities.Leave.LoanRequestActivitykot
+import stlhorizon.org.hrmselfservice.activities.Loan.LoanRequestActivity
 
 class LoanFragment : Fragment() {
 

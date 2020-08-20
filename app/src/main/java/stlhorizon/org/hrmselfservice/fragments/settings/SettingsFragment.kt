@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TableRow
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import stlhorizon.org.hrmselfservice.R
-import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
-import stlhorizon.org.hrmselfservice.activities.Payslip.GroupChatItemActivity
-import stlhorizon.org.hrmselfservice.activities.Payslip.SingleChatItemActivity
+import stlhorizon.org.hrmselfservice.activities.Authentication.LoginActivity
 
 class SettingsFragment : Fragment() {
 
@@ -23,6 +20,15 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
+
+        val logout = root.findViewById<LinearLayout>(R.id.logout)
+
+        //application button clicked--hide history and encashment
+        logout.setOnClickListener {
+            val it = Intent(context, LoginActivity::class.java)
+            startActivity(it)
+        }
+
         return root
     }
 }

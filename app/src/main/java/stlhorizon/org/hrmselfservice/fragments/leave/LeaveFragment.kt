@@ -1,5 +1,7 @@
 package stlhorizon.org.hrmselfservice.fragments.dashboard
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
+import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
 import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
@@ -26,6 +29,7 @@ import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
+import java.util.*
 
 
 class LeaveFragment : Fragment() {
@@ -33,13 +37,19 @@ class LeaveFragment : Fragment() {
     private var leaveTypeRecyclerView: RecyclerView? = null
     private var leaveTypeAdapter: LeaveTypeAdapter? = null
     private var txtTask: TextView? = null
-    private  var txtSDate:TextView? = null
-    private  var txtEDate:TextView? = null
+    private var txtSDate: TextView? = null
+    private var txtEDate: TextView? = null
 
-    private var txtFrom: TextView? = null
-    private  var txtTo:TextView? = null
-    private  var txtReason:TextView? = null
-     var myGlobalString = "initial_value"
+    private var txtLeaveTo: EditText? = null
+    private var txtReason: TextView? = null
+    var myGlobalString = "initial_value"
+
+    val c = Calendar.getInstance()
+    var hour: Int = c.get(Calendar.HOUR_OF_DAY)
+    var minute: Int = c.get(Calendar.MINUTE)
+    private var mMonth: Int = 0
+    private var mDay: Int = 0
+    private var mYear: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,14 +66,16 @@ class LeaveFragment : Fragment() {
         val btnencashment = root.findViewById<Button>(R.id.btnencashment)
         val btnhistory = root.findViewById<Button>(R.id.btnhistory)
         val btnapply = root.findViewById<Button>(R.id.btnApply)
+        val imgLeaveFrom = root.findViewById<ImageView>(R.id.imgLeaveFrom)
+        val imgLeaveTo = root.findViewById<ImageView>(R.id.imgLeaveTo)
 
         val llapplication = root.findViewById<LinearLayout>(R.id.llapplication)
         val llencashment = root.findViewById<LinearLayout>(R.id.llencashment)
         val llhistory = root.findViewById<LinearLayout>(R.id.llhistory)
 
-        txtFrom=root.findViewById(R.id.txtFrom)
-        txtTo=root.findViewById(R.id.txtTo)
-        txtReason=root.findViewById(R.id.txtReason)
+        val txtLeaveFrom = root.findViewById<EditText>(R.id.txtLeaveFrom)
+        val txtLeaveTo = root.findViewById<EditText>(R.id.txtLeaveTo)
+        txtReason = root.findViewById(R.id.txtReason)
 
         //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
 
@@ -92,15 +104,65 @@ class LeaveFragment : Fragment() {
 
         //Apply for leave
         btnapply.setOnClickListener {
-           applyForLeave()
+            applyForLeave()
         }
 
-      //  go to history item
-//        gotohistoryitem.setOnClickListener {
-//            val intent = Intent(context, LeaveItemActivity::class.java)
-//            startActivity(intent)
-//        }
+//choose From
+        imgLeaveFrom.setOnClickListener(View.OnClickListener { // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(
+                activity!!,
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthSelected = (monthOfYear + 1).toString()
+                    val daySelected = dayOfMonth.toString()
+                    val month =
+                        if (monthSelected.length == 1) "0$monthSelected" else monthSelected
+                    val day =
+                        if (daySelected.length == 1) "0$daySelected" else daySelected
+                    val date = "$year-$month-$day"
 
+
+
+                           txtLeaveFrom.setText(date)
+
+
+
+                }, mYear, mMonth, mDay
+            )
+            datePickerDialog.show()
+        })
+
+
+//choose To
+        imgLeaveTo.setOnClickListener(View.OnClickListener { // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(
+                activity!!,
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthSelected = (monthOfYear + 1).toString()
+                    val daySelected = dayOfMonth.toString()
+                    val month =
+                        if (monthSelected.length == 1) "0$monthSelected" else monthSelected
+                    val day =
+                        if (daySelected.length == 1) "0$daySelected" else daySelected
+                    val date = "$year-$month-$day"
+
+
+
+                    txtLeaveTo.setText(date)
+
+
+
+                }, mYear, mMonth, mDay
+            )
+            datePickerDialog.show()
+        })
 
 
         loadLeaveType()
@@ -133,8 +195,7 @@ class LeaveFragment : Fragment() {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
                             val leaveTypes: LeaveTypes =
                                 LeaveTypes.createLeaveTypesFrom(remoteResponse.message)
-                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> =
-                                leaveTypes.leaveTypesData!!
+                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> = leaveTypes.leaveTypesData!!
 
 
 
@@ -204,12 +265,15 @@ class LeaveFragment : Fragment() {
 //    }
 
 
-     fun loadLeaveHistory() {
-         val token =
-             "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+    fun loadLeaveHistory() {
+        val token =
+            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
 
-         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token", null, object :
-             OnReceivingResult {
+        NetworkConnection.makeAGetRequest(
+            "https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token",
+            null,
+            object :
+                OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
                     e.printStackTrace()
                 }
@@ -223,7 +287,8 @@ class LeaveFragment : Fragment() {
                     val response = remoteResponse.messangeAsJSON
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val leavehistory: LeaveHistory? = LeaveHistory.createLeaveHistoryFrom(remoteResponse.message)
+                            val leavehistory: LeaveHistory? =
+                                LeaveHistory.createLeaveHistoryFrom(remoteResponse.message)
                             if (leavehistory != null) {
                                 if (leavehistory.isAResponseASuccess) {
                                     for (leavehistorymodel in leavehistory.leaveHistoryData!!) {
@@ -270,8 +335,9 @@ class LeaveFragment : Fragment() {
 
     private fun populateTableLeaveHistory(leaveHistoryModel: LeaveHistory.LeaveHistoryModel): TableRow? {
         val view = view
-        val tableRow = LayoutInflater.from(context).inflate(R.layout.leavehistory_list_item, null, false) as TableRow
-       // txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
+        val tableRow = LayoutInflater.from(context)
+            .inflate(R.layout.leavehistory_list_item, null, false) as TableRow
+        // txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
         txtSDate = tableRow.findViewById<TextView>(R.id.txtSDate)
         txtEDate = tableRow.findViewById<TextView>(R.id.txtEDate)
         tableRow.txtTask.setText(leaveHistoryModel.leave_name)
@@ -298,8 +364,15 @@ class LeaveFragment : Fragment() {
         }
 
         override fun onClick(view: View) {
-         //   val intent = Intent(getContext(), LeaveItemActivity::class.java)
+
+
+            val intent = Intent(view.context, LeaveItemActivity::class.java)
+            intent.putExtra("DETAIL", leaveHistoryModel.toString())
+            view.context.startActivity(intent)
+
         }
+
+
 
 
         init {
@@ -308,9 +381,7 @@ class LeaveFragment : Fragment() {
     }
 
 
-
     /** APPLY FOR LEAVE**/
-
 
 
     fun applyForLeave() {
@@ -333,10 +404,12 @@ class LeaveFragment : Fragment() {
         try {
             headers.put("Content-Type", "multipart/form-data")
             jsonObject.put("leave_id", code_request_status.toString())
-            jsonObject.put("applied_from", txtFrom?.text.toString())
-            jsonObject.put("applied_to", txtTo?.text.toString())
+            jsonObject.put("applied_from", txtLeaveFrom?.text.toString())
+            jsonObject.put("applied_to", txtLeaveTo?.text.toString())
             jsonObject.put("reason", txtReason?.text.toString())
-            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/leave-application?token=$token", jsonObject, headers,
+            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/leave-application?token=$token",
+                jsonObject,
+                headers,
                 object : OnReceivingResult {
                     override fun onErrorResult(e: IOException) {
                         Log.e("error", e.message)
@@ -357,8 +430,10 @@ class LeaveFragment : Fragment() {
                              * **/
 
                             if (response.getString("success").equals("1", ignoreCase = true)) {
-                                val leaveApplicationSuccessResponse: LeaveApplicationSuccessResponse = LeaveApplicationSuccessResponse.createLeaveApplicationSuccessResponseFrom(remoteResponse.message
-                                )
+                                val leaveApplicationSuccessResponse: LeaveApplicationSuccessResponse =
+                                    LeaveApplicationSuccessResponse.createLeaveApplicationSuccessResponseFrom(
+                                        remoteResponse.message
+                                    )
 
 
                                 Toast.makeText(
@@ -390,7 +465,6 @@ class LeaveFragment : Fragment() {
                         }
 
 
-
                     }
 
                     override fun onReceiving300SeriesResponse(remoteResponse: RemoteResponse?) {
@@ -413,7 +487,6 @@ class LeaveFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
 
 
 }

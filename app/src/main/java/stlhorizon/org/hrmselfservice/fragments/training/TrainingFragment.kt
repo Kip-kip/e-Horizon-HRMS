@@ -1,6 +1,9 @@
 package stlhorizon.org.hrmselfservice.fragments.training
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -12,34 +15,48 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
+import kotlinx.android.synthetic.main.fragment_leave.tab_layout
+import kotlinx.android.synthetic.main.fragment_training.*
 import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
+import kotlinx.android.synthetic.main.traininghistory_list_item.*
+import kotlinx.android.synthetic.main.traininghistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
+import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
+import stlhorizon.org.hrmselfservice.activities.training.TrainingItemActivity
 import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
 import stlhorizon.org.hrmselfservice.adapter.TrainingCoursesAdapter
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
+import stlhorizon.org.hrmselfservice.model.Training.TrainingHistory
 import stlhorizon.org.hrmselfservice.model.login.LeaveApplicationSuccessResponse
 import stlhorizon.org.hrmselfservice.model.login.LoginErrorResponse
+import stlhorizon.org.hrmselfservice.model.login.TrainingRequestSuccessResponse
 import stlhorizon.org.hrmselfservice.model.training.TrainingCourses
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
+import java.util.*
 
 
 class TrainingFragment : Fragment() {
 
     private var trainingCoursesRecyclerView: RecyclerView? = null
     private var trainingcoursesAdapter: TrainingCoursesAdapter? = null
-    private var txtTask: TextView? = null
-    private  var txtSDate:TextView? = null
-    private  var txtEDate:TextView? = null
+    private  var txtRefNo:TextView? = null
+    private  var txtCourseStatus:TextView? = null
 
-    private var txtTrainingFrom: TextView? = null
-    private  var txtTrainingTo:TextView? = null
     private  var txtTrainingReason:TextView? = null
+
+    val c = Calendar.getInstance()
+    var hour: Int = c.get(Calendar.HOUR_OF_DAY)
+    var minute: Int = c.get(Calendar.MINUTE)
+    private var mMonth: Int = 0
+    private var mDay: Int = 0
+    private var mYear: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,8 +75,11 @@ class TrainingFragment : Fragment() {
         val lltrainingrequest = root.findViewById<LinearLayout>(R.id.lltrainingrequest)
         val lltraininghistory = root.findViewById<LinearLayout>(R.id.lltraininghistory)
 
-        txtTrainingFrom=root.findViewById(R.id.txtTrainingFrom)
-        txtTrainingTo=root.findViewById(R.id.txtTrainingTo)
+        val imgTrainingFrom = root.findViewById<ImageView>(R.id.imgTrainingFrom)
+        val imgTrainingTo = root.findViewById<ImageView>(R.id.imgTrainingTo)
+
+       val txtTrainingFrom=root.findViewById<EditText>(R.id.txtTrainingFrom)
+        val txtTrainingTo=root.findViewById<EditText>(R.id.txtTrainingTo)
         txtTrainingReason=root.findViewById(R.id.txtTrainingReason)
 
         //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
@@ -80,14 +100,73 @@ class TrainingFragment : Fragment() {
 
         //Apply for leave
         btnRequest.setOnClickListener {
-           //applyForLeave()
+           requestForTraining()
         }
+
+
+//choose From
+        imgTrainingFrom.setOnClickListener(View.OnClickListener { // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(
+                activity!!,
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthSelected = (monthOfYear + 1).toString()
+                    val daySelected = dayOfMonth.toString()
+                    val month =
+                        if (monthSelected.length == 1) "0$monthSelected" else monthSelected
+                    val day =
+                        if (daySelected.length == 1) "0$daySelected" else daySelected
+                    val date = "$year-$month-$day"
+
+
+
+                    txtTrainingFrom.setText(date)
+
+
+
+                }, mYear, mMonth, mDay
+            )
+            datePickerDialog.show()
+        })
+
+
+//choose To
+        imgTrainingTo.setOnClickListener(View.OnClickListener { // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(
+                activity!!,
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val monthSelected = (monthOfYear + 1).toString()
+                    val daySelected = dayOfMonth.toString()
+                    val month =
+                        if (monthSelected.length == 1) "0$monthSelected" else monthSelected
+                    val day =
+                        if (daySelected.length == 1) "0$daySelected" else daySelected
+                    val date = "$year-$month-$day"
+
+
+
+                    txtTrainingTo.setText(date)
+
+
+
+                }, mYear, mMonth, mDay
+            )
+            datePickerDialog.show()
+        })
+
 
 
 
         loadTrainingCourses()
 
-        loadLeaveHistory()
+        loadTrainingHistory()
 
         return root
     }
@@ -138,11 +217,11 @@ class TrainingFragment : Fragment() {
             })
     }
 
-     fun loadLeaveHistory() {
+     fun loadTrainingHistory() {
          val token =
              "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
 
-         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token", null, object :
+         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/training-history?token=$token", null, object :
              OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
                     e.printStackTrace()
@@ -157,20 +236,20 @@ class TrainingFragment : Fragment() {
                     val response = remoteResponse.messangeAsJSON
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val leavehistory: LeaveHistory? = LeaveHistory.createLeaveHistoryFrom(remoteResponse.message)
-                            if (leavehistory != null) {
-                                if (leavehistory.isAResponseASuccess) {
-                                    for (leavehistorymodel in leavehistory.leaveHistoryData!!) {
+                            val traininghistory: TrainingHistory? = TrainingHistory.createTrainingHistoryFrom(remoteResponse.message)
+                            if (traininghistory != null) {
+                                if (traininghistory.isAResponseASuccess) {
+                                    for (traininghistorymodel in traininghistory.trainingHistoryData!!) {
                                         tab_layout.addView(
-                                            this@TrainingFragment.populateTableLeaveHistory(
-                                                leavehistorymodel
+                                            this@TrainingFragment.populateTableTrainingHistory(
+                                                traininghistorymodel
                                             )
                                         )
                                     }
                                 } else {
                                     Toast.makeText(
                                         context,
-                                        "" + leavehistory.success,
+                                        "" + traininghistory.success,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -202,18 +281,17 @@ class TrainingFragment : Fragment() {
     }
 
 
-    private fun populateTableLeaveHistory(leaveHistoryModel: LeaveHistory.LeaveHistoryModel): TableRow? {
+    private fun populateTableTrainingHistory(trainingHistoryModel: TrainingHistory.TrainingHistoryModel): TableRow? {
         val view = view
-        val tableRow = LayoutInflater.from(context).inflate(R.layout.leavehistory_list_item, null, false) as TableRow
-       // txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
-        txtSDate = tableRow.findViewById<TextView>(R.id.txtSDate)
-        txtEDate = tableRow.findViewById<TextView>(R.id.txtEDate)
-        tableRow.txtTask.setText(leaveHistoryModel.leave_name)
+        val tableRow = LayoutInflater.from(context).inflate(R.layout.traininghistory_list_item, null, false) as TableRow
+        txtRefNo= tableRow.findViewById<TextView>(R.id.txtRefNo)
+        txtCourseStatus = tableRow.findViewById<TextView>(R.id.txtTrainingCourseName)
+        tableRow.txtRefNo.setText(trainingHistoryModel.reference_no)
 
 
         tableRow.setOnClickListener(
             HistoryClickEvent(
-                leaveHistoryModel
+                trainingHistoryModel
             )
         )
         return tableRow
@@ -221,41 +299,45 @@ class TrainingFragment : Fragment() {
     }
 
 
-    internal class HistoryClickEvent(leaveHistoryModel: LeaveHistory.LeaveHistoryModel) :
+    internal class HistoryClickEvent(trainingHistoryModel: TrainingHistory. TrainingHistoryModel) :
         View.OnClickListener {
-        private var leaveHistoryModel: LeaveHistory.LeaveHistoryModel? = null
+        private var trainingHistoryModel: TrainingHistory.TrainingHistoryModel? = null
 
 
-        fun HistoryClickEvent(leaveHistoryModel: LeaveHistory.LeaveHistoryModel?) {
-            this.leaveHistoryModel = leaveHistoryModel
+        fun HistoryClickEvent(leaveHistoryModel: TrainingHistory.TrainingHistoryModel?) {
+            this.trainingHistoryModel = trainingHistoryModel
 
         }
 
         override fun onClick(view: View) {
-         //   val intent = Intent(getContext(), LeaveItemActivity::class.java)
+
+            val intent = Intent(view.context, TrainingItemActivity::class.java)
+            intent.putExtra("DETAIL", trainingHistoryModel.toString())
+            view.context.startActivity(intent)
+
         }
 
 
         init {
-            this.leaveHistoryModel = leaveHistoryModel
+            this.trainingHistoryModel = trainingHistoryModel
         }
     }
 
 
 
-    /** APPLY FOR LEAVE**/
+    /** REQUEST FOR TRAIINING **/
 
 
 
-    fun applyForLeave() {
+    fun requestForTraining() {
 
         //Get selected leave ID
-        val M_SHARED_PREFERENCES = "CodeRequestPref"
+        val M_SHARED_PREFERENCES = "CourseID"
         val mPreferences: SharedPreferences = activity!!.getSharedPreferences(
             M_SHARED_PREFERENCES,
             Context.MODE_PRIVATE
         )
-        val code_request_status = mPreferences.getString("SKIP_CODE_REQUEST", "0")
+        val course_id = mPreferences.getString("COURSE_ID", "0")
 
 
         val token =
@@ -266,11 +348,11 @@ class TrainingFragment : Fragment() {
         val headers = JSONObject()
         try {
             headers.put("Content-Type", "multipart/form-data")
-            jsonObject.put("leave_id", code_request_status.toString())
-            jsonObject.put("applied_from", txtFrom?.text.toString())
-            jsonObject.put("applied_to", txtTo?.text.toString())
-            jsonObject.put("reason", txtReason?.text.toString())
-            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/leave-application?token=$token", jsonObject, headers,
+            jsonObject.put("course_id", course_id.toString())
+            jsonObject.put("applied_from", txtTrainingFrom?.text.toString())
+            jsonObject.put("applied_to", txtTrainingTo?.text.toString())
+            jsonObject.put("reason", txtTrainingReason?.text.toString())
+            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/request-training?token=$token", jsonObject, headers,
                 object : OnReceivingResult {
                     override fun onErrorResult(e: IOException) {
                         Log.e("error", e.message)
@@ -289,20 +371,30 @@ class TrainingFragment : Fragment() {
                             /**
                              * Success 1
                              * **/
+                            val trainingRequestSuccessResponse: TrainingRequestSuccessResponse =TrainingRequestSuccessResponse.createTrainingRequestSuccessResponseFrom(remoteResponse.message
+                            )
 
                             if (response.getString("success").equals("1", ignoreCase = true)) {
-                                val leaveApplicationSuccessResponse: LeaveApplicationSuccessResponse = LeaveApplicationSuccessResponse.createLeaveApplicationSuccessResponseFrom(remoteResponse.message
-                                )
+
 
 
                                 Toast.makeText(
                                     activity,
-                                    leaveApplicationSuccessResponse.message,
+                                    trainingRequestSuccessResponse.message,
                                     Toast.LENGTH_LONG
                                 ).show()
 
 
                                 return
+                            }
+                            else{
+
+                                Toast.makeText(
+                                    activity,
+                                    trainingRequestSuccessResponse.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()

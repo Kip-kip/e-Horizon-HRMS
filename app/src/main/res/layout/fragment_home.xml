@@ -195,6 +195,8 @@
                     android:layout_height="1dp" />
 
                 <TextView
+
+                    android:id="@+id/toCalendar"
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,25 +209,26 @@
                     android:textSize="@dimen/_13sdp"
                     android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/edittextbg"
-                    android:layout_marginTop="@dimen/_5sdp">
-
-
-                    <noman.weekcalendar.WeekCalendar
-                        android:id="@+id/weekCalendar"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:dayNameLength="threeLetters"
-                        app:daysTextColor="@color/colorPrimaryDark"
-                        app:todaysDateBgColor="@color/blue_400"
-                        app:weekTextColor="@color/black" />
+                        android:background="@color/edittextbg"
+                        android:layout_marginTop="@dimen/_5sdp">
+
+
+                        <noman.weekcalendar.WeekCalendar
+                            android:id="@+id/weekCalendar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:dayNameLength="threeLetters"
+                            app:daysTextColor="@color/colorPrimaryDark"
+                            app:todaysDateBgColor="@color/blue_400"
+                            app:weekTextColor="@color/black" />
 
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
+
 
             </LinearLayout>
 

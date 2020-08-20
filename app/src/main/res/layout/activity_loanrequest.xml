@@ -126,12 +126,7 @@
                 android:layout_weight="1"
                 android:padding="@dimen/spacing_large">
 
-                <ImageView
-                    android:id="@+id/ImgStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_filter_list_black_24dp"/>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -140,9 +135,8 @@
                     >
                     <Spinner
                         android:layout_width="match_parent"
-                        android:id="@+id/txtMaritalStatus"
+                        android:id="@+id/loanCategory"
                         android:minHeight="@dimen/_30sdp"
-                        android:entries="@array/category"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:theme="@style/spinner"
                         android:layout_height="wrap_content">
@@ -158,14 +152,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/spacing_large">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_attach_money_black_24dp"/>
 
                 <EditText
-                    android:id="@+id/txtEName"
+                    android:id="@+id/edtstaffid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edit_text_blue"
@@ -173,7 +162,7 @@
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp"
                     android:gravity="top"
-                    android:hint="Amount"
+                    android:hint="Staff ID"
                     android:padding="@dimen/spacing_middle" />
 
 
@@ -184,14 +173,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/spacing_large">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_date_range_black_24dp"/>
+
 
                 <EditText
-                    android:id="@+id/txtEDesc"
+                    android:id="@+id/edtinterestrate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edit_text_blue"
@@ -199,7 +184,71 @@
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp"
                     android:gravity="top"
-                    android:hint="Start date"
+                    android:hint="Interest rate"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+
+
+                <EditText
+                    android:id="@+id/edtappliedamount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="top"
+                    android:hint="Applied_amount"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+
+
+                <EditText
+                    android:id="@+id/edtrepaymentamount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="top"
+                    android:hint="Repayment amount"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_large">
+
+
+                <EditText
+                    android:id="@+id/edtrepaymentduration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text_blue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="top"
+                    android:hint="Repayment_duration"
                     android:padding="@dimen/spacing_middle" />
 
 
@@ -209,7 +258,7 @@
             <Button
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:id="@+id/btnSubmit"
+                android:id="@+id/btnRequestLOan"
                 android:textSize="@dimen/_12sdp"
                 android:background="@drawable/bg_btn_round_darkblue"
                 android:layout_width="match_parent"

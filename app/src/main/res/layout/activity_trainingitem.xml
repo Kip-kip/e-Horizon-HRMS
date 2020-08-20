@@ -122,11 +122,45 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="Leave ID: "
+                    android:text="Course ID: "
                     android:textSize="16sp" />
 
+
                 <TextView
-                    android:id="@+id/txtLeaveItemLeaveID"
+                    android:id="@+id/txtCourseID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_gravity="center"
+                    android:text="  2813371"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/spacing_large">
+
+                <TextView
+                    android:id="@+id/txtEventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/raleway_regular"
+                    android:layout_gravity="center"
+                    android:text="Course Name: "
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/txtCourseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -158,7 +192,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/txtLeaveItemReason"
+                    android:id="@+id/txtTrainingItemReason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -190,7 +224,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/txtLeaveItemFrom"
+                    android:id="@+id/txtTrainingItemFrom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -222,7 +256,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/txtLeaveItemTo"
+                    android:id="@+id/txtTrainingItemTo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -253,19 +287,19 @@
                     android:text="Status:"
                     android:textSize="16sp" />
 
-<!--                <Button-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textColor="#fff"-->
-<!--                    android:id="@+id/btnSubmit"-->
-<!--                    android:textSize="@dimen/_12sdp"-->
-<!--                    android:background="@drawable/bg_btn_round_green"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="@dimen/_20sdp"-->
-<!--                    android:layout_marginLeft="@dimen/_10sdp"-->
-<!--                    android:layout_marginRight="@dimen/_10sdp"-->
-<!--                    android:text="Approved"-->
-<!--                    android:fontFamily="@font/raleway_regular"-->
-<!--                    android:textAllCaps="false"/>-->
+                <!--                <Button-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    android:textColor="#fff"-->
+                <!--                    android:id="@+id/btnSubmit"-->
+                <!--                    android:textSize="@dimen/_12sdp"-->
+                <!--                    android:background="@drawable/bg_btn_round_green"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="@dimen/_20sdp"-->
+                <!--                    android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--                    android:layout_marginRight="@dimen/_10sdp"-->
+                <!--                    android:text="Approved"-->
+                <!--                    android:fontFamily="@font/raleway_regular"-->
+                <!--                    android:textAllCaps="false"/>-->
 
             </LinearLayout>
 

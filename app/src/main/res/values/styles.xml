@@ -32,6 +32,9 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/blue_grey_500</item>
+    </style>
 
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@android:color/white</item>

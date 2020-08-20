@@ -122,7 +122,7 @@
         </activity>
 
         <activity
-            android:name=".activities.Leave.LoanRequestActivity"
+            android:name=".activities.Loan.LoanRequestActivity"
             android:theme="@style/MyCustomAppTheme"
             >
             <intent-filter>
@@ -143,6 +143,29 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.CalendarActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.training.TrainingItemActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

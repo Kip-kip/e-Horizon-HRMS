@@ -1,55 +1,42 @@
-package stlhorizon.org.hrmselfservice.fragments.dashboard
+package stlhorizon.org.hrmselfservice.activities.Leave
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_profile.*
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
-import stlhorizon.org.hrmselfservice.activities.Payslip.ProfileItemActivity
-import stlhorizon.org.hrmselfservice.model.user.Profile
+import stlhorizon.org.hrmselfservice.model.Leave.LoanCategorykt
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
+import stlhorizon.org.uniscoo.adapter.LoanCategorySpinnerAdapterkt
 import java.io.IOException
 
-class ProfileFragment : Fragment() {
+class LoanRequestActivitykot : AppCompatActivity() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val gotoprofileitem = root.findViewById<LinearLayout>(R.id.toprofileitem)
+    private var loanCategorySpinnerAdapter: LoanCategorySpinnerAdapterkt? = null
+    private var spinner: Spinner? = null
 
-        gotoprofileitem.setOnClickListener {
-            val intent = Intent(context, ProfileItemActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_loanrequest)
 
-        loadProfile()
 
-        return root
+
+        loadLoanCategory()
+
     }
 
 
-    private fun loadProfile() {
+    private fun loadLoanCategory() {
 
         val token =
             "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
 
 
-        val jsonObject = JSONObject()
-        NetworkConnection.makeAPostRequest(
-             "https://hrms5.stl-horizon.com/api/web/api/user-profile?token=" + token,
-            jsonObject.toString(),
+        NetworkConnection.makeAGetRequest(
+            "https://hrms5.stl-horizon.com/api/web/api/loan-category?token=" + token,
             null,
             object : OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
@@ -62,19 +49,18 @@ class ProfileFragment : Fragment() {
                     val response: JSONObject = remoteResponse.getMessangeAsJSON()
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val profile: Profile? = Profile.createProfileFrom(remoteResponse.getMessage())
-                            val profileModel: Profile.ProfileModel = profile!!.ProfileModel()
+                            val loanCategory: LoanCategorykt =
+                                LoanCategorykt.createLoanCategoryFrom(remoteResponse.getMessage())
+                            val userTypeModel: List<LoanCategorykt.LoanCategoryModel> =
+                                loanCategory.loanCategoryData!!
 
-                            if (context == null) {
-                            } else {
-//                                Glide.with(context)
-//                                    .load(profileModel.getSv_student_photo())
-//                                    .into(profileimage)
-                            }
-//                            name.setText(profileModel.first_name+(" ")+(profileModel.middle_name+(" ")+(profileModel.last_name))
-//                            )
-//                            email.setText(profileModel.email)
-//                            phone.setText(profileModel.phone_no)
+                            spinner?.setAdapter(LoanCategorySpinnerAdapterkt(userTypeModel, applicationContext).also({ loanCategorySpinnerAdapter = it })
+                            )
+
+                            spinner?.setOnItemSelectedListener(loanCategorySpinnerAdapter)
+
+
+                            return
                         } else {
                         }
                     } catch (e: JSONException) {
@@ -88,6 +74,5 @@ class ProfileFragment : Fragment() {
                 override fun onAnyEvent() {}
             })
     }
-
 
 }

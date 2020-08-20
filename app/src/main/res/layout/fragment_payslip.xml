@@ -98,6 +98,7 @@
 
 
         <LinearLayout
+            android:id="@+id/changeyear"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginLeft="@dimen/_10sdp"
@@ -146,13 +147,13 @@
                     >
 
                     <TextView
-                        android:id="@+id/txtEventName"
+                        android:id="@+id/tv_select_year"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:fontFamily="@font/raleway_regular"
-                        android:text="2020"
+                        android:text="2019"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -211,7 +212,7 @@
                 >
 
                 <LinearLayout
-                    android:id="@+id/gotoitem"
+                    android:id="@+id/january"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -245,6 +246,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/february"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -275,6 +277,7 @@
                     android:background="@color/greyy_500" />
 
                 <LinearLayout
+                    android:id="@+id/march"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -327,6 +330,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/april"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -360,6 +364,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/may"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -390,6 +395,7 @@
                     android:background="@color/greyy_500" />
 
                 <LinearLayout
+                    android:id="@+id/june"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -442,6 +448,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/july"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -475,6 +482,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/august"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -505,6 +513,7 @@
                     android:background="@color/greyy_500" />
 
                 <LinearLayout
+                    android:id="@+id/september"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -557,6 +566,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/october"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -590,6 +600,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/november"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -620,6 +631,7 @@
                     android:background="@color/greyy_500" />
 
                 <LinearLayout
+                    android:id="@+id/december"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

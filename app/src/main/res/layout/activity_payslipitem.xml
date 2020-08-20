@@ -98,7 +98,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
+            android:layout_height="@dimen/_500sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
@@ -106,11 +106,35 @@
             android:orientation="vertical">
 
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/payslip"/>
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:progressTint="@color/colorPrimaryDark"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/a"
+                android:theme="@style/ProgressBarStyle"
+                android:layout_marginTop="@dimen/_150sdp"
+                android:layout_gravity="center"
+                />
 
+            <TextView
+                android:id="@+id/txtprogress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:layout_gravity="center"
+                android:text="Fetching your payslip...Please wait"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textSize="@dimen/_13sdp" />
+            <WebView
+                android:visibility="gone"
+                android:id="@+id/wV"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="#00000000" />
 
         </LinearLayout>
     </LinearLayout>
