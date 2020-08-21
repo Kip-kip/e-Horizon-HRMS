@@ -168,13 +168,14 @@
 
 
                         <TextView
+                            android:id="@+id/names"
                             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:fontFamily="@font/raleway_regular"
-                            android:text="John Doe"
+                            android:text=""
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/_13sdp"
                             android:textStyle="bold" />

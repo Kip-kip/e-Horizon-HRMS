@@ -222,10 +222,6 @@ class Profile : Response() {
         @Expose
         var service_id: String? = null
         @Expose
-        var dependants: String? = null
-        @Expose
-        var qualifications: String? = null
-        @Expose
         var email: String? = null
         @Expose
         var phone_no: String? = null
@@ -235,6 +231,11 @@ class Profile : Response() {
         var department: String? = null
 
 
+        @Expose
+        var dependantsdata: List<Dependants>? = null
+
+        @Expose
+        var qualificationsdata: List<Qualifications>? = null
 
 
 
@@ -243,6 +244,13 @@ class Profile : Response() {
             return gsonBuilder.create().toJson(this)
         }
     }
+
+
+//   inner class DependantsModel {
+//       private val success: String? = null
+//       private val message: String? = null
+//       var data: List<Dependants>? = null
+//    }
 
     override fun toString(): String {
         val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()

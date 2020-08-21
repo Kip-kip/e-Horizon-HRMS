@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import stlhorizon.org.hrmselfservice.R;
 import stlhorizon.org.hrmselfservice.adapter.LoanCategorySpinnerAdapter;
+import stlhorizon.org.hrmselfservice.model.loan.LoanApplication;
 import stlhorizon.org.hrmselfservice.model.spinners.LoanCategory;
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection;
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult;
@@ -127,61 +128,74 @@ public class LoanRequestActivity extends AppCompatActivity {
 
     public void applyLoan() {
 
-        String token ="eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo";
-
+        String token = "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo";
         JSONObject jsonObject = new JSONObject();
+        JSONObject headers = new JSONObject();
         try {
+            headers.put("Content-Type", "multipart/form-data");
             LoanCategory.LoanCategoryModel loanCategoryModel=(LoanCategory.LoanCategoryModel)spinner.getSelectedItem();
 
             String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
 
-            jsonObject.put("staff_id", edtstaffid.getText().toString());
-            jsonObject.put("repayment_amount", edtrepaymentamount.getText().toString());
-            jsonObject.put("interest_rate", edtinterestrate.getText().toString());
-            jsonObject.put("applied_amount", edtappliedamount.getText().toString());
+            jsonObject.put("staff_id", "1");
+            jsonObject.put("repayment_amount","2");
+            jsonObject.put("interest_rate","3");
+            jsonObject.put("applied_amount","5225");
             jsonObject.put("category_id",loanCategoryModel.getId());
             jsonObject.put("applied_on", date);
-            jsonObject.put("repayment_duration", edtrepaymentduration.getText().toString());
+            jsonObject.put("repayment_duration", "25");
 
-
+            Toast.makeText(LoanRequestActivity.this, loanCategoryModel.getId(), Toast.LENGTH_SHORT).show();
 
         } catch (JSONException e) {
 
         }
-
-        NetworkConnection.makeAPostRequest("https://hrms5.stl-horizon.com/api/web/api/apply-loan?token=" + token, jsonObject.toString(), null, new OnReceivingResult() {
+        NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/apply-loan?token=" + token, jsonObject, headers, new OnReceivingResult() {
             @Override
             public void onErrorResult(IOException e) {
                 e.printStackTrace();
+
+
             }
 
             @Override
             public void onReceiving100SeriesResponse(RemoteResponse remoteResponse) {
-
             }
 
             @Override
             public void onReceiving200SeriesResponse(RemoteResponse remoteResponse) {
                 NetworkConnection.remoteResponseLogger(remoteResponse);
                 JSONObject response = remoteResponse.getMessangeAsJSON();
+                LoanApplication loanApplication=LoanApplication.createLoanApplicationFrom(remoteResponse.getMessage());
+                try {
+                    if (response.getString("success").equalsIgnoreCase("1")) {
+
+                        Toast.makeText(LoanRequestActivity.this, loanApplication.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        return;
+
+
+                    }
+                    else{
+                        Toast.makeText(LoanRequestActivity.this, loanApplication.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
             }
 
             @Override
             public void onReceiving300SeriesResponse(RemoteResponse remoteResponse) {
-
             }
 
             @Override
             public void onReceiving400SeriesResponse(RemoteResponse remoteResponse) {
-
             }
 
             @Override
             public void onReceiving500SeriesResponse(RemoteResponse remoteResponse) {
-
             }
 
             @Override
@@ -191,5 +205,7 @@ public class LoanRequestActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }

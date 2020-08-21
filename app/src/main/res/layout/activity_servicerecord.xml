@@ -112,6 +112,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="-150dp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@drawable/curve_alledges_white"
                 >
 
@@ -122,14 +123,14 @@
                     android:layout_marginLeft="@dimen/spacing_middle"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:layout_marginRight="@dimen/spacing_middle"
-                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/_10sdp"
 
                     >
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_450sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/curve_alledges_white"
                         android:orientation="vertical">
 
@@ -148,51 +149,22 @@
 
 
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="@dimen/_80sdp"
-                                android:layout_height="@dimen/_80sdp"
-                                android:layout_gravity="center"
-                                app:civ_border_color="@color/white"
-                                app:civ_border_width="2dp"
-                                android:src="@drawable/ava"
-                                />
-
 
 
 
                             <TextView
+                                android:id="@+id/namepersonaldetails"
                                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/_5sdp"
                                 android:fontFamily="@font/raleway_regular"
-                                android:text="John Doe"
+                                android:text="My Service Record"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_13sdp"
+                                android:textSize="@dimen/_17sdp"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:fontFamily="@font/raleway_regular"
-                                android:text="doejohn@blk.com"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_12sdp" />
 
-                            <TextView
-                                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:fontFamily="@font/raleway_regular"
-                                android:text="254712835617"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/_12sdp" />
 
 
 
@@ -236,6 +208,7 @@
                                     android:layout_weight="1"
                                     android:textStyle="bold"
                                     android:text="Personal Info"
+                                    android:visibility="invisible"
                                     android:layout_marginLeft="@dimen/_5sdp"
                                     android:fontFamily="@font/raleway_regular"
                                     android:textSize="@dimen/_13sdp"
@@ -283,147 +256,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Alternate name"
+                                    android:text="Branch:"
                                     android:textSize="@dimen/_12sdp"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:textColor="@color/black" />
-
-
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_30sdp"
-                                android:fontFamily="@font/raleway_regular"
-                                android:text="John Doe"
-                                android:textColor="@color/grey_80" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_30sdp"
-                                android:background="?attr/selectableItemBackground"
-                                android:clickable="true"
-                                android:gravity="center_vertical"
-                                android:minHeight="@dimen/spacing_xxlarge"
-                                android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_medium"
-                                android:paddingRight="@dimen/spacing_medium">
-
-                                <ImageButton
-                                    android:layout_width="34dp"
-                                    android:layout_height="@dimen/spacing_xmlarge"
-                                    android:background="@android:color/transparent"
-                                    android:tint="@color/grey_40"
-                                    app:srcCompat="@drawable/ic_date_range_black_24dp" />
-
-                                <View
-                                    android:layout_width="@dimen/spacing_small"
-                                    android:layout_height="wrap_content" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Date of birth"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:textColor="@color/black" />
-
-
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_30sdp"
-                                android:fontFamily="@font/raleway_regular"
-                                android:text="1992-03-17"
-                                android:textColor="@color/grey_80" />
-
-
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@color/edittextbg"
-                            android:paddingBottom="@dimen/spacing_middle"
-                            android:paddingTop="@dimen/spacing_middle">
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_30sdp"
-                                android:background="?attr/selectableItemBackground"
-                                android:clickable="true"
-                                android:gravity="center_vertical"
-                                android:minHeight="@dimen/spacing_xxlarge"
-                                android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_medium"
-                                android:paddingRight="@dimen/spacing_medium">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:textStyle="bold"
-                                    android:text="Contact Info"
-                                    android:layout_marginLeft="@dimen/_5sdp"
-                                    android:fontFamily="@font/raleway_regular"
-                                    android:textSize="@dimen/_13sdp"
-                                    android:textColor="@color/grey_80" />
-
-
-
-                                <ImageButton
-                                    android:id="@+id/logoutimg"
-                                    android:layout_width="@dimen/spacing_xmlarge"
-                                    android:layout_height="@dimen/spacing_xmlarge"
-                                    android:background="@android:color/transparent"
-                                    android:tint="@color/grey_40"
-                                    app:srcCompat="@drawable/ic_edit_black_24dp" />
-
-
-
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_30sdp"
-                                android:background="?attr/selectableItemBackground"
-                                android:clickable="true"
-                                android:gravity="center_vertical"
-                                android:minHeight="@dimen/spacing_xxlarge"
-                                android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_medium"
-                                android:paddingRight="@dimen/spacing_medium">
-
-                                <ImageButton
-                                    android:layout_width="34dp"
-                                    android:layout_height="@dimen/spacing_xmlarge"
-                                    android:background="@android:color/transparent"
-                                    android:tint="@color/grey_40"
-                                    app:srcCompat="@drawable/ic_local_phone_black_24dp" />
-
-                                <View
-                                    android:layout_width="@dimen/spacing_small"
-                                    android:layout_height="wrap_content" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Phone"
-                                    android:textSize="@dimen/_12sdp"
                                     android:fontFamily="@font/raleway_regular"
                                     android:textColor="@color/black" />
 
@@ -432,11 +267,12 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/branch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_30sdp"
                                 android:fontFamily="@font/raleway_regular"
-                                android:text="2547825535523"
+                                android:text=""
                                 android:textColor="@color/grey_80" />
 
                             <LinearLayout
@@ -455,7 +291,7 @@
                                     android:layout_height="@dimen/spacing_xmlarge"
                                     android:background="@android:color/transparent"
                                     android:tint="@color/grey_40"
-                                    app:srcCompat="@drawable/ic_date_range_black_24dp" />
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
                                 <View
                                     android:layout_width="@dimen/spacing_small"
@@ -465,7 +301,53 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Email"
+                                    android:text="Department:"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/department"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Current position:"
+                                    android:textStyle="bold"
                                     android:textSize="@dimen/_12sdp"
                                     android:fontFamily="@font/raleway_regular"
                                     android:textColor="@color/black" />
@@ -475,15 +357,201 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/currentposition"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/_30sdp"
                                 android:fontFamily="@font/raleway_regular"
-                                android:text="doejohn@blk.com"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Grade:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/grade"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Date of join:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/doj"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Nature of employment:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/noe"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Date of retirement:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
                                 android:textColor="@color/grey_80" />
 
 
                         </LinearLayout>
+
 
                     </LinearLayout>
 
