@@ -148,6 +148,7 @@
 
 
                             <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/userimage"
                                 android:layout_width="@dimen/_80sdp"
                                 android:layout_height="@dimen/_80sdp"
                                 android:layout_gravity="center"
@@ -276,6 +277,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/toimportantnumbers"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_30sdp"
                                 android:background="?attr/selectableItemBackground"
@@ -332,6 +334,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/toqualifications"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_30sdp"
                                 android:background="?attr/selectableItemBackground"
@@ -389,6 +392,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/todependants"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_30sdp"
                                 android:background="?attr/selectableItemBackground"

@@ -62,9 +62,8 @@ class ServiceRecordActivity : AppCompatActivity() {
                             currentposition.setText(profile!!.profileData!!.current_position)
                             grade.setText(profile!!.profileData!!.grade)
                             doj.setText(profile!!.profileData!!.date_of_join)
-                            dob.setText(profile!!.profileData!!.dob)
-//                            noe.setText(profile!!.profileData!!.nature_of_employment)
-//                            dor.setText(profile!!.profileData!!.estimated_retirement_date)
+                            noe.setText(profile!!.profileData!!.nature_of_employment)
+                            dor.setText(profile!!.profileData!!.estimated_retirement_date)
 
                             return
                         } else {

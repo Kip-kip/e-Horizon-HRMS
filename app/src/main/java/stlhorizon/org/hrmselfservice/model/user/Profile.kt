@@ -229,6 +229,10 @@ class Profile : Response() {
         var grade: String? = null
         @Expose
         var department: String? = null
+        @Expose
+        var nssf: String? = null
+        @Expose
+        var nhif: String? = null
 
 
         @Expose

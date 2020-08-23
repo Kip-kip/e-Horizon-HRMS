@@ -11,6 +11,8 @@ import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.MainActivity
+import stlhorizon.org.hrmselfservice.helper.SQLiteHandler
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.login.LoginErrorResponse
 import stlhorizon.org.hrmselfservice.model.login.LoginSuccessResponse
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
@@ -23,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
     private var username: EditText? = null
     private var password: EditText? = null
     private var code: EditText? = null
+    private val db: SQLiteHandler? = null
+    private val session: SessionManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,15 @@ class LoginActivity : AppCompatActivity() {
                             if (response.getString("success").equals("1", ignoreCase = true)) {
                                 val loginSuccessResponse: LoginSuccessResponse = LoginSuccessResponse.createLoginSuccessResponseFrom(remoteResponse.message
                                     )
+
+                                //save token to sqlite table
+
+                                //save token to sqlite table
+                                db!!.addUser("username", "phone", loginSuccessResponse.token,
+                                    "created_at"
+                                )
+                                session!!.setLogin(true)
+
 
                                 //redirect to Home  page
                                 val it = Intent(applicationContext, MainActivity::class.java)

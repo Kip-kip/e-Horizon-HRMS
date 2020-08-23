@@ -178,6 +178,39 @@
         </activity>
 
 
+        <activity
+            android:name=".activities.Profile.ImportantNumbersActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.Profile.DependantsActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.Profile.QualificationsActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

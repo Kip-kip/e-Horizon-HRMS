@@ -147,6 +147,7 @@
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/homeuserimage"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_height="@dimen/_40sdp"

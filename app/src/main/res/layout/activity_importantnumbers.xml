@@ -108,7 +108,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_400sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="-150dp"
                 android:layout_marginRight="@dimen/_10sdp"
@@ -159,7 +159,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/raleway_regular"
-                                android:text="My Dependants"
+                                android:text="My Service Record"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="@dimen/_17sdp"
                                 android:textStyle="bold" />
@@ -181,7 +181,285 @@
                             android:layout_height="1dp" />
 
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/edittextbg"
+                            android:paddingBottom="@dimen/spacing_middle"
+                            android:paddingTop="@dimen/spacing_middle">
 
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textStyle="bold"
+                                    android:text="Personal Info"
+                                    android:visibility="invisible"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:textColor="@color/grey_80" />
+
+
+
+                                <ImageButton
+                                    android:id="@+id/editpersonalinfo"
+                                    android:layout_width="@dimen/spacing_xmlarge"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Staff No:"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/staffno"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="ID No:"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/idno"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="KRA No:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/kra"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="NHIF No:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/nhif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:gravity="center_vertical"
+                                android:minHeight="@dimen/spacing_xxlarge"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/spacing_medium"
+                                android:paddingRight="@dimen/spacing_medium">
+
+                                <ImageButton
+                                    android:layout_width="34dp"
+                                    android:layout_height="@dimen/spacing_xmlarge"
+                                    android:background="@android:color/transparent"
+                                    android:tint="@color/grey_40"
+                                    app:srcCompat="@drawable/ic_account_circle_black_24dp" />
+
+                                <View
+                                    android:layout_width="@dimen/spacing_small"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="NSSF No:"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/raleway_regular"
+                                    android:textColor="@color/black" />
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/nssf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:fontFamily="@font/raleway_regular"
+                                android:text=""
+                                android:textColor="@color/grey_80" />
+
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
