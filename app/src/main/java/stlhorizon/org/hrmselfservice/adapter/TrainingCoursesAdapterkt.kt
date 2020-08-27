@@ -12,13 +12,13 @@ import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.model.training.TrainingCourses
 
 
-public class TrainingCoursesAdapter(
+public class TrainingCoursesAdapterkt(
     var context: Context,
 
 
     dataModelArrayList: List<TrainingCourses.TrainingCoursesModel>
 ) :
-    RecyclerView.Adapter<TrainingCoursesAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<TrainingCoursesAdapterkt.MyViewHolder>() {
     private val inflater: LayoutInflater
     private val dataModelArrayListUsertypes: List<TrainingCourses.TrainingCoursesModel>
     override fun onCreateViewHolder(

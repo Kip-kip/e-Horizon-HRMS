@@ -3,7 +3,6 @@ package stlhorizon.org.hrmselfservice.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 
 public class SessionManager {
     // LogCat tag
@@ -36,10 +35,24 @@ public class SessionManager {
         // commit changes
         editor.commit();
 
-        Log.d(TAG, "User login session modified!");
     }
 
     public boolean isLoggedIn(){
         return pref.getBoolean(KEY_IS_LOGGEDIN, false);
     }
+
+    public void setToken(String token){
+
+        // Storing name in pref
+        editor.putString("USER_TOKEN", token);
+
+        // commit changes
+        editor.commit();
+    }
+
+    public String getToken(){
+        return pref.getString("USER_TOKEN","");
+    }
+
+
 }

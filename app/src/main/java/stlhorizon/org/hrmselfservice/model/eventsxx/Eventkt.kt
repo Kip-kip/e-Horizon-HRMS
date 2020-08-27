@@ -1,4 +1,4 @@
-package stlhorizon.org.hrmselfservice.model.events
+package stlhorizon.org.hrmselfservice.model.eventsxx
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
@@ -8,12 +8,12 @@ import stlhorizon.org.hrmselfservice.model.highordermodels.Response
 import java.util.*
 
 
-class Event : Response() {
+class Eventkt : Response() {
     @Expose
     var message: String? = null
 
     @Expose
-    var eventData: List<EventModel>? = null
+    var eventData: List<EventModelkt>? = null
     val eventTimeStamp: List<Long>
         get() {
             val eventstimestamps: MutableList<Long> =
@@ -36,11 +36,11 @@ class Event : Response() {
     }
 
     companion object {
-        fun createEventFrom(eventResponseString: String?): Event {
+        fun createEventFrom(eventResponseString: String?): Eventkt {
             val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
             return gsonBuilder.create().fromJson(
                 eventResponseString,
-                Event::class.java
+                Eventkt::class.java
             )
         }
     }

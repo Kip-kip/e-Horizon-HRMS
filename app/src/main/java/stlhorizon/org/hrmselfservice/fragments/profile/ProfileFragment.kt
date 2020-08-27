@@ -20,6 +20,7 @@ import stlhorizon.org.hrmselfservice.activities.Profile.DependantsActivity
 import stlhorizon.org.hrmselfservice.activities.Profile.ImportantNumbersActivity
 import stlhorizon.org.hrmselfservice.activities.Profile.QualificationsActivity
 import stlhorizon.org.hrmselfservice.activities.Profile.ServiceRecordActivity
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.user.Profile
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
@@ -27,7 +28,7 @@ import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
 
 class ProfileFragment : Fragment() {
-
+    private var session: SessionManager? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +41,10 @@ class ProfileFragment : Fragment() {
         val todependants = root.findViewById<LinearLayout>(R.id.todependants)
         val toqualifications = root.findViewById<LinearLayout>(R.id.toqualifications)
         val userimage =root.findViewById<CircleImageView>(R.id.userimage)
+
+        // Session manager
+        session = SessionManager(context)
+
         gotopersonaldetails.setOnClickListener {
             val intent = Intent(context, PersonalDetailsActivity::class.java)
             startActivity(intent)
@@ -78,8 +83,7 @@ class ProfileFragment : Fragment() {
         context: Context?,
         imageView: ImageView?
     ) {
-        val token ="eyJpYXQiOjE1OTc4OTkyODEsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5Nzg5OTI4MSwiZXhwIjoxNTk3ODk5MjkxLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImVlZDNhMzkwNDI0OTJhNDI3NjM5NGU3NDA5NjgxNTUxIn0.eyJ1c2VyX2lkIjoxODYsInVzZXJuYW1lIjoidmljdG9yIiwiZnVsbF9uYW1lIjoiVmljdG9yIE11bW8gVGl0dXMiLCJwYXJ0eV9pZCI6IjEwMjYiLCJkYXRlX29mX2JpcnRoIjoiMTk4Mi0wMi0xNCIsImdlbmRlciI6Ik1BTEUiLCJjaXR5IjoiTmFpcm9iaSIsImNvdW50cnkiOiJLRSIsImFwcG9pbnRfaWQiOiI0MDI2IiwiZW50aXR5X2lkIjoiMTAwIiwiZW50aXR5X25hbWUiOiJTT0ZUV0FSRSBURUNITk9MT0dJRVMgTElNSVRFRCIsInBlcm5vIjoiU1RMMDI5IiwiY29kZSI6IkhSNTAwMSIsImltYWdlIjpudWxsfQ.Q3AqDpxM8mMI-WB-PNbkSziSXXHnncYSy367Gwil6o8";
-
+        val token =session!!.token;
         if (token == "null") return
         val thumbnail_ulr: String =
             "https://hrms5.stl-horizon.com/api/web/api/user-avatar?" + "token=" + token
@@ -93,9 +97,8 @@ class ProfileFragment : Fragment() {
 
     fun loadUserProfile() {
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
-        NetworkConnection.makeAGetRequest(
+        val token =session!!.token;
+         NetworkConnection.makeAGetRequest(
             "https://hrms5.stl-horizon.com/api/web/api/user-profile?token=$token",
             null,
             object : OnReceivingResult {

@@ -13,7 +13,7 @@ import com.applikeysolutions.cosmocalendar.view.CalendarView;
 import java.util.ArrayList;
 import java.util.List;
 
-import stlhorizon.org.hrmselfservice.activities.Interfaces.SelectedDayListener;
+import stlhorizon.org.hrmselfservice.interfaces.SelectedDayListener;
 
 
 public class CustomCalenderView extends CalendarView {

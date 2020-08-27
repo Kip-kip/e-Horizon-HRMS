@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +16,6 @@ import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 
 public class LeaveTypeAdapter(
     var context: Context,
-
 
     dataModelArrayList: List<LeaveTypes.LeaveTypesModel>
 ) :
@@ -38,7 +36,8 @@ public class LeaveTypeAdapter(
     ) {
 
         val leavetypeModel: LeaveTypes.LeaveTypesModel = dataModelArrayListUsertypes[position]
-        holder.txtLeaveName.setText(leavetypeModel.leave_name)
+        holder.txtLeaveName.setText(leavetypeModel.leave_name!!.dropLast(5))
+        holder.txtBalance.setText("Balance: "+leavetypeModel.balance)
 
         //style the card view
         if (leavetypeModel.short_name.equals("COMP")) {
@@ -64,6 +63,7 @@ public class LeaveTypeAdapter(
 
         holder.itemView.setOnClickListener {
 
+
             // skip code request if already requested
             val preferences: SharedPreferences
             val MY_SHARED_PREFERENCES = "CodeRequestPref"
@@ -73,8 +73,8 @@ public class LeaveTypeAdapter(
             )
             val editor = preferences.edit()
             editor.putString("SKIP_CODE_REQUEST", leavetypeModel.leave_id)
+            editor.putString("SELECTED_LEAVE", leavetypeModel.leave_name)
             editor.commit()
-
 
         }
 
@@ -88,13 +88,16 @@ public class LeaveTypeAdapter(
     inner class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var txtLeaveName: TextView
+        var txtBalance: TextView
         var llCardBody: LinearLayout
         var imgcircle: CircleImageView
 
         init {
             txtLeaveName = itemView.findViewById(R.id.txtLeaveName)
+            txtBalance = itemView.findViewById(R.id.txtBalance)
             llCardBody = itemView.findViewById(R.id.cardbody)
             imgcircle = itemView.findViewById(R.id.imgcircle)
+
         }
     }
 
@@ -102,4 +105,7 @@ public class LeaveTypeAdapter(
         inflater = LayoutInflater.from(context)
         dataModelArrayListUsertypes = dataModelArrayList
     }
+
+
+
 }

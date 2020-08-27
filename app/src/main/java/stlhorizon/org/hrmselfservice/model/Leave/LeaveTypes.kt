@@ -25,6 +25,8 @@ class LeaveTypes : Response() {
 
         @Expose
         var leave_name: String? = null
+        @Expose
+        var balance: String? = null
 
         override fun toString(): String {
             val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()

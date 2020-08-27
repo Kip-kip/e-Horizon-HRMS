@@ -31,6 +31,14 @@
     <color name="grey_80">#37474F</color>
     <color name="grey_90">#263238</color>
 
+    <array name="tab_colors">
+        <item name="tab_2">#222833</item>
+        <item name="tab_1">#b7a57a</item>
+        <item name="tab_3">#075e54</item>
+        <item name="tab_4">#eea642</item>
+        <item name="tab_5">#ff2d9a59</item>
+    </array>
+
 
 
     <color name="red_50">#FFEBEE</color>

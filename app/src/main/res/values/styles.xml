@@ -43,6 +43,8 @@
         <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
     </style>
-
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
 
 </resources>

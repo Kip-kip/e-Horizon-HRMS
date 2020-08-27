@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.Leave.LoanCategorykt
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
@@ -17,11 +18,13 @@ class LoanRequestActivitykot : AppCompatActivity() {
 
     private var loanCategorySpinnerAdapter: LoanCategorySpinnerAdapterkt? = null
     private var spinner: Spinner? = null
-
+    private var session: SessionManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loanrequest)
 
+        // Session manager
+        session = SessionManager(applicationContext)
 
 
         loadLoanCategory()
@@ -31,9 +34,7 @@ class LoanRequestActivitykot : AppCompatActivity() {
 
     private fun loadLoanCategory() {
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
-
+        val token =session!!.token;
 
         NetworkConnection.makeAGetRequest(
             "https://hrms5.stl-horizon.com/api/web/api/loan-category?token=" + token,

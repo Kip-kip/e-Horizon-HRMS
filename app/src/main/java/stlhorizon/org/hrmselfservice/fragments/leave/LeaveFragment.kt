@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
 import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 import stlhorizon.org.hrmselfservice.model.login.LeaveApplicationSuccessResponse
@@ -43,6 +45,7 @@ class LeaveFragment : Fragment() {
     private var txtLeaveTo: EditText? = null
     private var txtReason: TextView? = null
     var myGlobalString = "initial_value"
+    private var txtSelectedLeave: TextView? = null
 
     val c = Calendar.getInstance()
     var hour: Int = c.get(Calendar.HOUR_OF_DAY)
@@ -50,6 +53,7 @@ class LeaveFragment : Fragment() {
     private var mMonth: Int = 0
     private var mDay: Int = 0
     private var mYear: Int = 0
+    private var session: SessionManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +80,11 @@ class LeaveFragment : Fragment() {
         val txtLeaveFrom = root.findViewById<EditText>(R.id.txtLeaveFrom)
         val txtLeaveTo = root.findViewById<EditText>(R.id.txtLeaveTo)
         txtReason = root.findViewById(R.id.txtReason)
+        txtSelectedLeave = root.findViewById(R.id.txtSelectedLeave)
 
+
+        // Session manager
+        session = SessionManager(context)
         //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
 
         leaveTypeRecyclerView = root.findViewById<RecyclerView>(R.id.leavetyperecyclerView)
@@ -102,6 +110,8 @@ class LeaveFragment : Fragment() {
             llencashment.visibility = View.GONE
         }
 
+        displaySelectedLeave()
+
         //Apply for leave
         btnapply.setOnClickListener {
             applyForLeave()
@@ -113,9 +123,7 @@ class LeaveFragment : Fragment() {
             mYear = c[Calendar.YEAR]
             mMonth = c[Calendar.MONTH]
             mDay = c[Calendar.DAY_OF_MONTH]
-            val datePickerDialog = DatePickerDialog(
-                activity!!,
-                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val datePickerDialog = DatePickerDialog(activity!!, R.style.DialogTheme,OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     val monthSelected = (monthOfYear + 1).toString()
                     val daySelected = dayOfMonth.toString()
                     val month =
@@ -124,10 +132,9 @@ class LeaveFragment : Fragment() {
                         if (daySelected.length == 1) "0$daySelected" else daySelected
                     val date = "$year-$month-$day"
 
+                    txtLeaveFrom.visibility = View.VISIBLE
 
-
-                           txtLeaveFrom.setText(date)
-
+                    txtLeaveFrom.setText(date)
 
 
                 }, mYear, mMonth, mDay
@@ -142,9 +149,7 @@ class LeaveFragment : Fragment() {
             mYear = c[Calendar.YEAR]
             mMonth = c[Calendar.MONTH]
             mDay = c[Calendar.DAY_OF_MONTH]
-            val datePickerDialog = DatePickerDialog(
-                activity!!,
-                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val datePickerDialog = DatePickerDialog(activity!!,  R.style.DialogTheme,OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     val monthSelected = (monthOfYear + 1).toString()
                     val daySelected = dayOfMonth.toString()
                     val month =
@@ -153,10 +158,9 @@ class LeaveFragment : Fragment() {
                         if (daySelected.length == 1) "0$daySelected" else daySelected
                     val date = "$year-$month-$day"
 
-
+                    txtLeaveTo.visibility = View.VISIBLE
 
                     txtLeaveTo.setText(date)
-
 
 
                 }, mYear, mMonth, mDay
@@ -175,11 +179,10 @@ class LeaveFragment : Fragment() {
 
     fun loadLeaveType() {
 
+        val token = session!!.token;
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
         NetworkConnection.makeAGetRequest(
-            "https://hrms5.stl-horizon.com/api/web/api/leave-type?token=$token",
+            "https://hrms5.stl-horizon.com/api/web/api/leave-list-balance?token=$token",
             null,
             object : OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
@@ -195,7 +198,8 @@ class LeaveFragment : Fragment() {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
                             val leaveTypes: LeaveTypes =
                                 LeaveTypes.createLeaveTypesFrom(remoteResponse.message)
-                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> = leaveTypes.leaveTypesData!!
+                            val leaveTypesModel: List<LeaveTypes.LeaveTypesModel> =
+                                leaveTypes.leaveTypesData!!
 
 
 
@@ -266,8 +270,8 @@ class LeaveFragment : Fragment() {
 
 
     fun loadLeaveHistory() {
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+
+        val token = session!!.token;
 
         NetworkConnection.makeAGetRequest(
             "https://hrms5.stl-horizon.com/api/web/api/leave-history?token=$token",
@@ -373,8 +377,6 @@ class LeaveFragment : Fragment() {
         }
 
 
-
-
         init {
             this.leaveHistoryModel = leaveHistoryModel
         }
@@ -395,9 +397,7 @@ class LeaveFragment : Fragment() {
         val code_request_status = mPreferences.getString("SKIP_CODE_REQUEST", "0")
 
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
-
+        val token = session!!.token;
 
         val jsonObject = JSONObject()
         val headers = JSONObject()
@@ -488,5 +488,34 @@ class LeaveFragment : Fragment() {
         }
     }
 
+
+    //  DISPLAY selected leave
+    fun displaySelectedLeave() {
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                //clear shared preferences
+                val preferences: SharedPreferences
+                val MY_SHARED_PREFERENCES = "CodeRequestPref"
+                preferences = context!!.getSharedPreferences(
+                    MY_SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE
+                )
+                val editor = preferences.edit()
+
+                editor.clear()
+
+                //Get selected leave ID
+                val M_SHARED_PREFERENCES = "CodeRequestPref"
+                val mPreferences: SharedPreferences = activity!!.getSharedPreferences(
+                    M_SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE
+                )
+                val selectedleave = mPreferences.getString("SELECTED_LEAVE", "No leave type selected")
+                txtSelectedLeave!!.setText("Selected leave type: " + selectedleave!!.toLowerCase())
+                handler.postDelayed(this, 1000)//1 sec delay
+            }
+        }, 0)
+    }
 
 }

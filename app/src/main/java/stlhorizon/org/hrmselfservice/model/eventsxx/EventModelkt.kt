@@ -1,10 +1,10 @@
-package stlhorizon.org.hrmselfservice.model.events
+package stlhorizon.org.hrmselfservice.model.eventsxx
 
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import java.io.Serializable
 
-class EventModel : Serializable {
+class EventModelkt : Serializable {
 
     @Expose
     var event_id: Int? = null
@@ -43,9 +43,9 @@ class EventModel : Serializable {
     }
 
     companion object {
-        fun createEventModelFrom(eventResponseString: String?): EventModel {
+        fun createEventModelFrom(eventResponseString: String?): EventModelkt {
             val gsonBuilder = GsonBuilder().excludeFieldsWithoutExposeAnnotation()
-            return gsonBuilder.create().fromJson(eventResponseString, EventModel::class.java)
+            return gsonBuilder.create().fromJson(eventResponseString, EventModelkt::class.java)
         }
     }
 }

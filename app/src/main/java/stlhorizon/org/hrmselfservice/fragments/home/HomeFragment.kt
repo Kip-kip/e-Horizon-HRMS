@@ -17,7 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONException
 import stlhorizon.org.hrmselfservice.R
-import stlhorizon.org.hrmselfservice.activities.CalendarActivity
+import stlhorizon.org.hrmselfservice.activities.Calendar.CalendarActivity
 import stlhorizon.org.hrmselfservice.fragments.dashboard.ApprovalsFragment
 import stlhorizon.org.hrmselfservice.fragments.dashboard.LeaveFragment
 import stlhorizon.org.hrmselfservice.fragments.dashboard.PayslipFragment
@@ -26,6 +26,7 @@ import stlhorizon.org.hrmselfservice.fragments.loan.DocsFragment
 import stlhorizon.org.hrmselfservice.fragments.loan.LoanFragment
 import stlhorizon.org.hrmselfservice.fragments.training.TrainingFragment
 import stlhorizon.org.hrmselfservice.helper.SQLiteHandler
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.user.Profile
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
@@ -34,7 +35,7 @@ import java.io.IOException
 import java.util.*
 
 class HomeFragment : Fragment() {
-
+    private var session: SessionManager? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +53,8 @@ class HomeFragment : Fragment() {
         val trainingcard = root.findViewById<LinearLayout>(R.id.totraining)
         val calendar = root.findViewById<TextView>(R.id.toCalendar)
         val userimage = root.findViewById<CircleImageView>(R.id.homeuserimage)
+        // Session manager
+        session = SessionManager(context)
         //to profile
         profilesection.setOnClickListener {
             replaceFragment(ProfileFragment())
@@ -99,9 +102,7 @@ class HomeFragment : Fragment() {
         context: Context?,
         imageView: ImageView?
     ) {
-        val token =
-            "eyJpYXQiOjE1OTc4OTkyODEsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5Nzg5OTI4MSwiZXhwIjoxNTk3ODk5MjkxLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImVlZDNhMzkwNDI0OTJhNDI3NjM5NGU3NDA5NjgxNTUxIn0.eyJ1c2VyX2lkIjoxODYsInVzZXJuYW1lIjoidmljdG9yIiwiZnVsbF9uYW1lIjoiVmljdG9yIE11bW8gVGl0dXMiLCJwYXJ0eV9pZCI6IjEwMjYiLCJkYXRlX29mX2JpcnRoIjoiMTk4Mi0wMi0xNCIsImdlbmRlciI6Ik1BTEUiLCJjaXR5IjoiTmFpcm9iaSIsImNvdW50cnkiOiJLRSIsImFwcG9pbnRfaWQiOiI0MDI2IiwiZW50aXR5X2lkIjoiMTAwIiwiZW50aXR5X25hbWUiOiJTT0ZUV0FSRSBURUNITk9MT0dJRVMgTElNSVRFRCIsInBlcm5vIjoiU1RMMDI5IiwiY29kZSI6IkhSNTAwMSIsImltYWdlIjpudWxsfQ.Q3AqDpxM8mMI-WB-PNbkSziSXXHnncYSy367Gwil6o8";
-
+        val token =session!!.token;
         if (token == "null") return
         val thumbnail_ulr: String =
             "https://hrms5.stl-horizon.com/api/web/api/user-avatar?" + "token=" + token
@@ -114,24 +115,9 @@ class HomeFragment : Fragment() {
 
     fun loadUserProfile() {
 
+        val token =session!!.token;
 
-//get token from sqlite
-
-
-//get token from sqlite
-        val db = SQLiteHandler(context)
-        val user: HashMap<String, String> = db.getUserDetails()
-        val tokenn = user["token"]
-
-        Toast.makeText(
-            context,
-            tokenn,
-            Toast.LENGTH_LONG
-        ).show()
-
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
-        NetworkConnection.makeAGetRequest(
+               NetworkConnection.makeAGetRequest(
             "https://hrms5.stl-horizon.com/api/web/api/user-profile?token=$token",
             null,
             object : OnReceivingResult {

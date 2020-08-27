@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -9,46 +8,41 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
-        android:fitsSystemWindows="true"
         android:layout_width="fill_parent"
         android:layout_height="0.0dip"
-        app:elevation="0.0dip"
         android:background="@color/white"
+        android:fitsSystemWindows="true"
+        app:elevation="0.0dip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_toolbar"
-            android:fitsSystemWindows="true"
-            android:paddingBottom="@dimen/_5sdp"
             android:layout_width="fill_parent"
-            android:background="@color/colorPrimaryDark"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fitsSystemWindows="true"
             android:minHeight="?actionBarSize"
-            >
+            android:paddingBottom="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/kq"/>
-
-
-
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/kq" />
 
 
             <ImageView
                 android:id="@+id/profileimage"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_15sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="right"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_notifications_black_24dp"
-                />
-
+                android:src="@drawable/ic_notifications_black_24dp" />
 
 
             <LinearLayout
@@ -57,30 +51,25 @@
                 android:orientation="horizontal">
 
 
-
                 <LinearLayout
                     android:id="@+id/imageView_navigator_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
 
                     <ImageView
                         android:id="@+id/notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_35sdp"
-                        android:src="@drawable/hrmslogo"/>
+                        android:src="@drawable/hrmslogo" />
 
                 </LinearLayout>
             </LinearLayout>
-
-
-
 
 
         </androidx.appcompat.widget.Toolbar>
@@ -90,8 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@color/white"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@color/white"
             android:orientation="vertical"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
@@ -101,16 +90,18 @@
                 android:id="@+id/llexpected"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
+                android:orientation="horizontal"
                 android:weightSum="100">
+
                 <LinearLayout
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_weight="33">
+                    android:layout_weight="33"
+                    android:gravity="center">
+
                     <Button
                         android:id="@+id/btnapplication"
                         android:layout_width="match_parent"
@@ -125,15 +116,13 @@
                 </LinearLayout>
 
 
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_weight="33">
+                    android:layout_weight="33"
+                    android:gravity="center">
 
                     <Button
                         android:id="@+id/btnencashment"
@@ -153,8 +142,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="33">
+                    android:layout_weight="33"
+                    android:gravity="center">
 
                     <Button
                         android:id="@+id/btnhistory"
@@ -175,7 +164,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    LEAVE APPLICATION-->
+    <!--    LEAVE APPLICATION-->
 
 
     <androidx.core.widget.NestedScrollView
@@ -186,198 +175,210 @@
         android:scrollbars="none"
         android:scrollingCache="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/llapplication"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/_70sdp"
-        android:background="@color/edittextbg"
-        android:layout_height="match_parent">
-
-
-        <TextView
-            android:id="@+id/txtEventName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:fontFamily="@font/raleway_regular"
-            android:layout_gravity="left"
-            android:text="Select Leave Type"
-            android:textSize="16sp" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/leavetyperecyclerView"
-            android:scrollbars="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
-
         <LinearLayout
+            android:id="@+id/llapplication"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/curve_alledges_white"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/edittextbg"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_70sdp">
+
+
+            <TextView
+                android:id="@+id/txtEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:text="Select Leave Type"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leavetyperecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scrollbars="horizontal" />
 
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                >
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/curve_alledges_white"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/txtSelectedLeave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Selected"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <ImageView
-                        android:id="@+id/imgLeaveFrom"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/clock"/>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
 
-                    <TextView
 
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:fontFamily="@font/raleway_regular"
-                        android:text="From"
-                        android:textSize="16sp" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/txtLeaveFrom"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/raleway_regular"
-                        android:hint=""
-                        android:background="@null"
-                        android:textColor="@color/black"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:padding="@dimen/_5sdp"
-                        android:gravity="top" />
+                        <ImageView
+                            android:id="@+id/imgLeaveFrom"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/clock" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="From"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtLeaveFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:background="@null"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="top"
+                            android:visibility="gone"
+                            android:hint=""
+                            android:padding="@dimen/_5sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="fill_parent"
+                        android:background="@color/greyy_500" />
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imgLeaveTo"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/speed" />
+
+                        <TextView
+                            android:id="@+id/txtEventName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/raleway_regular"
+                            android:text="To"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtLeaveTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:background="@null"
+                            android:fontFamily="@font/raleway_regular"
+                            android:gravity="top"
+                            android:hint=""
+                            android:visibility="gone"
+                            android:padding="@dimen/_5sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
 
+                <EditText
+                    android:id="@+id/txtReason"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/edittextbg"
+                    android:fontFamily="@font/raleway_regular"
+                    android:gravity="top"
+                    android:hint="Reason(s)"
+                    android:inputType="text|textMultiLine"
+                    android:lines="8"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
-                <View
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="fill_parent"
-                    android:background="@color/greyy_500" />
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <ImageView
-                        android:id="@+id/imgLeaveTo"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/speed"/>
-
-                    <TextView
-                        android:id="@+id/txtEventName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:fontFamily="@font/raleway_regular"
-                        android:text="To"
-                        android:textSize="16sp" />
-                    <EditText
-                        android:id="@+id/txtLeaveTo"
-                        android:textSize="@dimen/_12sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/raleway_regular"
-                        android:hint=""
-                        android:textColor="@color/black"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:background="@null"
-                        android:padding="@dimen/_5sdp"
-                        android:gravity="top" />
-
-                </LinearLayout>
+                <Button
+                    android:id="@+id/btnApply"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/bg_btn_round_darkblue"
+                    android:fontFamily="@font/raleway_regular"
+                    android:text="Apply"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-
-            <EditText
-                android:id="@+id/txtReason"
-                android:textSize="@dimen/_12sdp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/raleway_regular"
-                android:lines="8"
-                android:hint="Reason(s)"
-                android:textColor="@color/black"
-                android:inputType="text|textMultiLine"
-                android:background="@color/edittextbg"
-                android:layout_margin="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
-                android:gravity="top" />
-
-            <Button
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:id="@+id/btnApply"
-                android:textSize="@dimen/_12sdp"
-                android:background="@drawable/bg_btn_round_darkblue"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="Apply"
-                android:fontFamily="@font/raleway_regular"
-                android:textAllCaps="false"/>
-
         </LinearLayout>
-    </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-<!--    LEAVE ENCASHMENT-->
+    <!--    LEAVE ENCASHMENT-->
 
     <LinearLayout
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/_100sdp"
-        android:layout_width="match_parent"
         android:id="@+id/llencashment"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_100sdp"
         android:background="@color/edittextbg"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:background="@drawable/curve_alledges_white"
             android:orientation="vertical">
 
@@ -385,13 +386,13 @@
                 android:id="@+id/txtEventName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/raleway_regular"
-                android:layout_gravity="center"
                 android:text="Encash leave balance"
-                android:textSize="16sp" />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
             <LinearLayout
@@ -399,23 +400,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/spacing_large">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_date_range_black_24dp"/>
+                    android:src="@drawable/ic_date_range_black_24dp" />
 
                 <EditText
                     android:id="@+id/txtEName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:background="@drawable/bg_edit_text_blue"
                     android:fontFamily="@font/raleway_regular"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:textSize="@dimen/_12sdp"
                     android:gravity="top"
                     android:hint="Date applied"
-                    android:padding="@dimen/spacing_middle" />
+                    android:padding="@dimen/spacing_middle"
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>
@@ -425,23 +427,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/spacing_large">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_date_range_black_24dp"/>
+                    android:src="@drawable/ic_date_range_black_24dp" />
 
                 <EditText
                     android:id="@+id/txtEDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:background="@drawable/bg_edit_text_blue"
                     android:fontFamily="@font/raleway_regular"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:textSize="@dimen/_12sdp"
                     android:gravity="top"
                     android:hint="Days to encash"
-                    android:padding="@dimen/spacing_middle" />
+                    android:padding="@dimen/spacing_middle"
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>
@@ -457,21 +460,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_attach_money_black_24dp"/>
+                    android:src="@drawable/ic_attach_money_black_24dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit_text_blue"
-                    >
+                    android:background="@drawable/bg_edit_text_blue">
+
                     <Spinner
-                        android:layout_width="match_parent"
                         android:id="@+id/txtMaritalStatus"
-                        android:minHeight="@dimen/_30sdp"
-                        android:entries="@array/payment_mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
-                        android:theme="@style/spinner"
-                        android:layout_height="wrap_content">
+                        android:entries="@array/payment_mode"
+                        android:minHeight="@dimen/_30sdp"
+                        android:theme="@style/spinner">
 
                     </Spinner>
                 </LinearLayout>
@@ -490,95 +493,92 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_info_outline_black_24dp"/>
+                    android:src="@drawable/ic_info_outline_black_24dp" />
 
 
                 <EditText
                     android:id="@+id/txtTaskDescription"
-                    android:textSize="@dimen/_12sdp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_70sdp"
-                    android:fontFamily="@font/raleway_regular"
-                    android:lines="8"
-                    android:hint="Reason(s)"
-                    android:textColor="@color/black"
-                    android:inputType="text|textMultiLine"
-                    android:background="@color/edittextbg"
                     android:layout_margin="@dimen/_5sdp"
+                    android:background="@color/edittextbg"
+                    android:fontFamily="@font/raleway_regular"
+                    android:gravity="top"
+                    android:hint="Reason(s)"
+                    android:inputType="text|textMultiLine"
+                    android:lines="8"
                     android:padding="@dimen/_5sdp"
-                    android:gravity="top" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>
 
 
             <Button
-                android:textStyle="bold"
-                android:textColor="#fff"
                 android:id="@+id/btnSubmit"
-                android:textSize="@dimen/_12sdp"
-                android:background="@drawable/bg_btn_round_darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="Encash"
+                android:background="@drawable/bg_btn_round_darkblue"
                 android:fontFamily="@font/raleway_regular"
-                android:textAllCaps="false"/>
+                android:text="Encash"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
 
-<!--LEAVE APPLICATION HISTORY-->
+    <!--LEAVE APPLICATION HISTORY-->
 
     <LinearLayout
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/_100sdp"
-        android:layout_width="match_parent"
         android:id="@+id/llhistory"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_100sdp"
         android:background="@color/edittextbg"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:visibility="gone">
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            >
+            app:layout_constraintRight_toRightOf="parent">
 
             <ScrollView
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:background="@color/white"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_50sdp"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" >
+                app:layout_constraintRight_toRightOf="parent">
 
 
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/white"
                     android:fitsSystemWindows="true"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_30sdp">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white">
-
 
 
                         <!--<HorizontalScrollView-->
@@ -591,41 +591,45 @@
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
                             <TableLayout
 
+                                android:id="@+id/tab_layout"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
 
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="10dp"
                                 android:paddingLeft="10dp"
-                                android:id="@+id/tab_layout"
-                                android:paddingRight="10dp" >
+                                android:paddingRight="10dp">
 
 
                                 <TableRow
                                     android:background="@color/colorPrimaryDark"
                                     android:padding="5dp">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:layout_weight="1"
-                                        android:textColor="@color/white"
-                                        android:text="Name" />
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/raleway_regular"
-                                        android:textColor="@color/white"
-                                        android:layout_weight="1"
-                                        android:text="Applied on" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/raleway_regular"
-                                        android:textColor="@color/white"
-                                        android:text="Status" />
+                                        android:text="Name"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/raleway_regular"
+                                        android:text="Applied on"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/raleway_regular"
+                                        android:text="Status"
+                                        android:textColor="@color/white" />
 
                                     <!--<TextView-->
                                     <!--android:layout_width="wrap_content"-->
@@ -638,11 +642,6 @@
                                 </TableRow>
                             </TableLayout>
                         </FrameLayout>
-
-
-
-
-
 
 
                     </RelativeLayout>

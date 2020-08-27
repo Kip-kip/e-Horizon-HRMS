@@ -17,16 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
 import kotlinx.android.synthetic.main.fragment_leave.tab_layout
 import kotlinx.android.synthetic.main.fragment_training.*
-import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
-import kotlinx.android.synthetic.main.traininghistory_list_item.*
 import kotlinx.android.synthetic.main.traininghistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
 import stlhorizon.org.hrmselfservice.R
-import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
 import stlhorizon.org.hrmselfservice.activities.training.TrainingItemActivity
-import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
-import stlhorizon.org.hrmselfservice.adapter.TrainingCoursesAdapter
+import stlhorizon.org.hrmselfservice.adapter.TrainingCoursesAdapterkt
+import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 import stlhorizon.org.hrmselfservice.model.Training.TrainingHistory
@@ -44,11 +41,12 @@ import java.util.*
 class TrainingFragment : Fragment() {
 
     private var trainingCoursesRecyclerView: RecyclerView? = null
-    private var trainingcoursesAdapter: TrainingCoursesAdapter? = null
-    private  var txtRefNo:TextView? = null
-    private  var txtCourseStatus:TextView? = null
+    private var trainingcoursesAdapter: TrainingCoursesAdapterkt? = null
+    private var txtRefNo: TextView? = null
+    private var txtCourseStatus: TextView? = null
 
-    private  var txtTrainingReason:TextView? = null
+    private var txtTrainingReason: TextView? = null
+    private var session: SessionManager? = null
 
     val c = Calendar.getInstance()
     var hour: Int = c.get(Calendar.HOUR_OF_DAY)
@@ -78,14 +76,17 @@ class TrainingFragment : Fragment() {
         val imgTrainingFrom = root.findViewById<ImageView>(R.id.imgTrainingFrom)
         val imgTrainingTo = root.findViewById<ImageView>(R.id.imgTrainingTo)
 
-       val txtTrainingFrom=root.findViewById<EditText>(R.id.txtTrainingFrom)
-        val txtTrainingTo=root.findViewById<EditText>(R.id.txtTrainingTo)
-        txtTrainingReason=root.findViewById(R.id.txtTrainingReason)
+        val txtTrainingFrom = root.findViewById<EditText>(R.id.txtTrainingFrom)
+        val txtTrainingTo = root.findViewById<EditText>(R.id.txtTrainingTo)
+        txtTrainingReason = root.findViewById(R.id.txtTrainingReason)
+        // Session manager
+        session = SessionManager(context)
 
         //val gotohistoryitem = root.findViewById<TableRow>(R.id.gotohistoryitem)
 
 
-        trainingCoursesRecyclerView = root.findViewById<RecyclerView>(R.id.trainingcourserecyclerView)
+        trainingCoursesRecyclerView =
+            root.findViewById<RecyclerView>(R.id.trainingcourserecyclerView)
 
         //application button clicked--hide history and encashment
         btntrainingrequest.setOnClickListener {
@@ -100,7 +101,7 @@ class TrainingFragment : Fragment() {
 
         //Apply for leave
         btnRequest.setOnClickListener {
-           requestForTraining()
+            requestForTraining()
         }
 
 
@@ -112,6 +113,7 @@ class TrainingFragment : Fragment() {
             mDay = c[Calendar.DAY_OF_MONTH]
             val datePickerDialog = DatePickerDialog(
                 activity!!,
+                R.style.DialogTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     val monthSelected = (monthOfYear + 1).toString()
                     val daySelected = dayOfMonth.toString()
@@ -121,13 +123,15 @@ class TrainingFragment : Fragment() {
                         if (daySelected.length == 1) "0$daySelected" else daySelected
                     val date = "$year-$month-$day"
 
-
+                    txtTrainingFrom.visibility = View.VISIBLE
 
                     txtTrainingFrom.setText(date)
 
 
-
-                }, mYear, mMonth, mDay
+                },
+                mYear,
+                mMonth,
+                mDay
             )
             datePickerDialog.show()
         })
@@ -141,6 +145,7 @@ class TrainingFragment : Fragment() {
             mDay = c[Calendar.DAY_OF_MONTH]
             val datePickerDialog = DatePickerDialog(
                 activity!!,
+                R.style.DialogTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     val monthSelected = (monthOfYear + 1).toString()
                     val daySelected = dayOfMonth.toString()
@@ -151,12 +156,14 @@ class TrainingFragment : Fragment() {
                     val date = "$year-$month-$day"
 
 
-
+                    txtTrainingTo.visibility = View.VISIBLE
                     txtTrainingTo.setText(date)
 
 
-
-                }, mYear, mMonth, mDay
+                },
+                mYear,
+                mMonth,
+                mDay
             )
             datePickerDialog.show()
         })
@@ -175,8 +182,7 @@ class TrainingFragment : Fragment() {
     fun loadTrainingCourses() {
 
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+        val token = session!!.token;
         NetworkConnection.makeAGetRequest(
             "https://hrms5.stl-horizon.com/api/web/api/training-courses?token=$token",
             null,
@@ -193,14 +199,23 @@ class TrainingFragment : Fragment() {
                     val response = remoteResponse.messangeAsJSON
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val trainingCourses: TrainingCourses = TrainingCourses.createTrainingCoursesFrom(remoteResponse.message)
-                            val trainingCoursesModel: List<TrainingCourses.TrainingCoursesModel> = trainingCourses.trainingCoursesData!!
+                            val trainingCourses: TrainingCourses =
+                                TrainingCourses.createTrainingCoursesFrom(remoteResponse.message)
+                            val trainingCoursesModel: List<TrainingCourses.TrainingCoursesModel> =
+                                trainingCourses.trainingCoursesData!!
 
 
 
-                            trainingcoursesAdapter = context?.let { TrainingCoursesAdapter(it, trainingCoursesModel) }
+                            trainingcoursesAdapter =
+                                context?.let { TrainingCoursesAdapterkt(it, trainingCoursesModel) }
                             trainingCoursesRecyclerView?.setAdapter(trainingcoursesAdapter)
-                            trainingCoursesRecyclerView?.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+                            trainingCoursesRecyclerView?.setLayoutManager(
+                                LinearLayoutManager(
+                                    context,
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
+                            )
 
                             return
                         } else {
@@ -217,12 +232,15 @@ class TrainingFragment : Fragment() {
             })
     }
 
-     fun loadTrainingHistory() {
-         val token =
-             "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
+    fun loadTrainingHistory() {
 
-         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/training-history?token=$token", null, object :
-             OnReceivingResult {
+        val token = session!!.token;
+
+        NetworkConnection.makeAGetRequest(
+            "https://hrms5.stl-horizon.com/api/web/api/training-history?token=$token",
+            null,
+            object :
+                OnReceivingResult {
                 override fun onErrorResult(e: IOException) {
                     e.printStackTrace()
                 }
@@ -236,7 +254,8 @@ class TrainingFragment : Fragment() {
                     val response = remoteResponse.messangeAsJSON
                     try {
                         if (response.getString("success").equals("1", ignoreCase = true)) {
-                            val traininghistory: TrainingHistory? = TrainingHistory.createTrainingHistoryFrom(remoteResponse.message)
+                            val traininghistory: TrainingHistory? =
+                                TrainingHistory.createTrainingHistoryFrom(remoteResponse.message)
                             if (traininghistory != null) {
                                 if (traininghistory.isAResponseASuccess) {
                                     for (traininghistorymodel in traininghistory.trainingHistoryData!!) {
@@ -283,8 +302,9 @@ class TrainingFragment : Fragment() {
 
     private fun populateTableTrainingHistory(trainingHistoryModel: TrainingHistory.TrainingHistoryModel): TableRow? {
         val view = view
-        val tableRow = LayoutInflater.from(context).inflate(R.layout.traininghistory_list_item, null, false) as TableRow
-        txtRefNo= tableRow.findViewById<TextView>(R.id.txtRefNo)
+        val tableRow = LayoutInflater.from(context)
+            .inflate(R.layout.traininghistory_list_item, null, false) as TableRow
+        txtRefNo = tableRow.findViewById<TextView>(R.id.txtRefNo)
         txtCourseStatus = tableRow.findViewById<TextView>(R.id.txtTrainingCourseName)
         tableRow.txtRefNo.setText(trainingHistoryModel.reference_no)
 
@@ -299,7 +319,7 @@ class TrainingFragment : Fragment() {
     }
 
 
-    internal class HistoryClickEvent(trainingHistoryModel: TrainingHistory. TrainingHistoryModel) :
+    internal class HistoryClickEvent(trainingHistoryModel: TrainingHistory.TrainingHistoryModel) :
         View.OnClickListener {
         private var trainingHistoryModel: TrainingHistory.TrainingHistoryModel? = null
 
@@ -324,9 +344,7 @@ class TrainingFragment : Fragment() {
     }
 
 
-
     /** REQUEST FOR TRAIINING **/
-
 
 
     fun requestForTraining() {
@@ -340,9 +358,7 @@ class TrainingFragment : Fragment() {
         val course_id = mPreferences.getString("COURSE_ID", "0")
 
 
-        val token =
-            "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo"
-
+        val token = session!!.token;
 
         val jsonObject = JSONObject()
         val headers = JSONObject()
@@ -352,7 +368,9 @@ class TrainingFragment : Fragment() {
             jsonObject.put("applied_from", txtTrainingFrom?.text.toString())
             jsonObject.put("applied_to", txtTrainingTo?.text.toString())
             jsonObject.put("reason", txtTrainingReason?.text.toString())
-            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/request-training?token=$token", jsonObject, headers,
+            NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/request-training?token=$token",
+                jsonObject,
+                headers,
                 object : OnReceivingResult {
                     override fun onErrorResult(e: IOException) {
                         Log.e("error", e.message)
@@ -371,11 +389,12 @@ class TrainingFragment : Fragment() {
                             /**
                              * Success 1
                              * **/
-                            val trainingRequestSuccessResponse: TrainingRequestSuccessResponse =TrainingRequestSuccessResponse.createTrainingRequestSuccessResponseFrom(remoteResponse.message
-                            )
+                            val trainingRequestSuccessResponse: TrainingRequestSuccessResponse =
+                                TrainingRequestSuccessResponse.createTrainingRequestSuccessResponseFrom(
+                                    remoteResponse.message
+                                )
 
                             if (response.getString("success").equals("1", ignoreCase = true)) {
-
 
 
                                 Toast.makeText(
@@ -386,8 +405,7 @@ class TrainingFragment : Fragment() {
 
 
                                 return
-                            }
-                            else{
+                            } else {
 
                                 Toast.makeText(
                                     activity,
@@ -416,7 +434,6 @@ class TrainingFragment : Fragment() {
                         }
 
 
-
                     }
 
                     override fun onReceiving300SeriesResponse(remoteResponse: RemoteResponse?) {
@@ -439,7 +456,6 @@ class TrainingFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
 
 
 }

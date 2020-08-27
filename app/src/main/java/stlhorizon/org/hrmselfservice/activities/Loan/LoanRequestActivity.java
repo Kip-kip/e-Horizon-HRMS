@@ -21,6 +21,8 @@ import java.util.Locale;
 
 import stlhorizon.org.hrmselfservice.R;
 import stlhorizon.org.hrmselfservice.adapter.LoanCategorySpinnerAdapter;
+import stlhorizon.org.hrmselfservice.helper.SQLiteHandler;
+import stlhorizon.org.hrmselfservice.helper.SessionManager;
 import stlhorizon.org.hrmselfservice.model.loan.LoanApplication;
 import stlhorizon.org.hrmselfservice.model.spinners.LoanCategory;
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection;
@@ -34,6 +36,8 @@ public class LoanRequestActivity extends AppCompatActivity {
     private LoanCategorySpinnerAdapter loanCategorySpinnerAdapter;
     TextView edtstaffid,edtappliedamount,edtrepaymentamount,edtinterestrate,edtrepaymentduration;
     Button btnRequest;
+    //private LinearLayout tocalender;
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,8 @@ public class LoanRequestActivity extends AppCompatActivity {
         edtrepaymentduration=findViewById(R.id.edtrepaymentduration);
         edtinterestrate=findViewById(R.id.edtinterestrate);
         btnRequest=findViewById(R.id.btnRequestLOan);
-
+        // session manager
+        session = new SessionManager(getApplicationContext());
 
         loadLoanCategory();
 
@@ -62,8 +67,7 @@ public class LoanRequestActivity extends AppCompatActivity {
 
     private void loadLoanCategory() {
 
-        String token ="eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo";
-
+        String token = session.getToken();
 
         NetworkConnection.makeAGetRequest("https://hrms5.stl-horizon.com/api/web/api/loan-category?token=" + token, null, new OnReceivingResult() {
             @Override
@@ -128,7 +132,8 @@ public class LoanRequestActivity extends AppCompatActivity {
 
     public void applyLoan() {
 
-        String token = "eyJpYXQiOjE1OTY0NDU1MzUsImlzcyI6ImhybXM1LnN0bC1ob3Jpem9uLmNvbSIsIm5iZiI6MTU5NjQ0NTUzNSwiZXhwIjoxNTk2NDQ1NTQ1LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6Ijg1ZjFjNTQ4Y2VlNWI2ODNmYWE0MGNjNjJhYTA1YWJjIn0.eyJ1c2VyX2lkIjoyMzEsInVzZXJuYW1lIjoiQ3lydXMiLCJmdWxsX25hbWUiOiJDeXJ1cyAgS2lwcm90aWNoIiwicGFydHlfaWQiOiIxNDg4MDgxIiwiZGF0ZV9vZl9iaXJ0aCI6IjE5OTQtMDktMTkiLCJnZW5kZXIiOiJNQUxFIiwiY2l0eSI6Ik5BSVJPQkkiLCJjb3VudHJ5IjoiS0UiLCJhcHBvaW50X2lkIjoiMTQ4ODA4NSIsImVudGl0eV9pZCI6IjEwMCIsImVudGl0eV9uYW1lIjoiU09GVFdBUkUgVEVDSE5PTE9HSUVTIExJTUlURUQiLCJwZXJubyI6IlNUTDEzNCIsImNvZGUiOiJIUjUwMDEiLCJpbWFnZSI6bnVsbH0.rDnJfGiTVFSjNtTGqTIw9iv-XI64_yg2PrHnrzRyGGo";
+        String token = session.getToken();
+
         JSONObject jsonObject = new JSONObject();
         JSONObject headers = new JSONObject();
         try {

@@ -3,15 +3,17 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_5sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
     android:layout_marginBottom="5dp">
 
 
     <LinearLayout
         android:id="@+id/cardbody"
         android:background="@color/white"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginLeft="@dimen/_10sdp">
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginLeft="@dimen/_5sdp">
 
 
 
@@ -19,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_15sdp"
             android:orientation="vertical"
             >
 
@@ -39,8 +42,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="center"
                 android:src="@drawable/course"
                 android:translationZ="2dp"

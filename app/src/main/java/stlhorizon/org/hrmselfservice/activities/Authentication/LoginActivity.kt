@@ -25,8 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private var username: EditText? = null
     private var password: EditText? = null
     private var code: EditText? = null
-    private val db: SQLiteHandler? = null
-    private val session: SessionManager? = null
+    private var session: SessionManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +36,8 @@ class LoginActivity : AppCompatActivity() {
         code = findViewById(R.id.txtCode)
 
         val login = findViewById<Button>(R.id.btnLogin)
+        // Session manager
+        session = SessionManager(applicationContext)
 
         //move to next activity
         login.setOnClickListener {
@@ -49,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun loginUser() {
+
 
         val jsonObject = JSONObject()
         val headers = JSONObject()
@@ -83,15 +85,8 @@ class LoginActivity : AppCompatActivity() {
                             if (response.getString("success").equals("1", ignoreCase = true)) {
                                 val loginSuccessResponse: LoginSuccessResponse = LoginSuccessResponse.createLoginSuccessResponseFrom(remoteResponse.message
                                     )
-
-                                //save token to sqlite table
-
-                                //save token to sqlite table
-                                db!!.addUser("username", "phone", loginSuccessResponse.token,
-                                    "created_at"
-                                )
+                                session!!.setToken(loginSuccessResponse.token);
                                 session!!.setLogin(true)
-
 
                                 //redirect to Home  page
                                 val it = Intent(applicationContext, MainActivity::class.java)
