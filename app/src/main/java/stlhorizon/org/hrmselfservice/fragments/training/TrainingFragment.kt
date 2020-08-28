@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
 import kotlinx.android.synthetic.main.fragment_leave.tab_layout
 import kotlinx.android.synthetic.main.fragment_training.*
+import kotlinx.android.synthetic.main.trainingcourses_list_item.view.*
+import kotlinx.android.synthetic.main.traininghistory_list_item.*
 import kotlinx.android.synthetic.main.traininghistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -43,10 +46,12 @@ class TrainingFragment : Fragment() {
     private var trainingCoursesRecyclerView: RecyclerView? = null
     private var trainingcoursesAdapter: TrainingCoursesAdapterkt? = null
     private var txtRefNo: TextView? = null
-    private var txtCourseStatus: TextView? = null
+    private var txtTrainingCourseName: TextView? = null
+    private var txtRequestOn: TextView? = null
 
     private var txtTrainingReason: TextView? = null
     private var session: SessionManager? = null
+    private var txtSelectedTraining: TextView? = null
 
     val c = Calendar.getInstance()
     var hour: Int = c.get(Calendar.HOUR_OF_DAY)
@@ -79,6 +84,8 @@ class TrainingFragment : Fragment() {
         val txtTrainingFrom = root.findViewById<EditText>(R.id.txtTrainingFrom)
         val txtTrainingTo = root.findViewById<EditText>(R.id.txtTrainingTo)
         txtTrainingReason = root.findViewById(R.id.txtTrainingReason)
+        txtSelectedTraining = root.findViewById(R.id.txtSelectedTraining)
+
         // Session manager
         session = SessionManager(context)
 
@@ -98,6 +105,18 @@ class TrainingFragment : Fragment() {
             lltrainingrequest.visibility = View.GONE
             lltraininghistory.visibility = View.VISIBLE
         }
+
+        //Clear selected Training prefernces
+        val preferences: SharedPreferences
+        val MY_SHARED_PREFERENCES = "Course"
+        preferences = activity!!.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString("SHOW_COURSE","0")
+        editor.commit()
+
+
+
+        displaySelectedTraining()
 
         //Apply for leave
         btnRequest.setOnClickListener {
@@ -305,8 +324,12 @@ class TrainingFragment : Fragment() {
         val tableRow = LayoutInflater.from(context)
             .inflate(R.layout.traininghistory_list_item, null, false) as TableRow
         txtRefNo = tableRow.findViewById<TextView>(R.id.txtRefNo)
-        txtCourseStatus = tableRow.findViewById<TextView>(R.id.txtTrainingCourseName)
+        txtTrainingCourseName = tableRow.findViewById<TextView>(R.id.txtTrainingCourseName)
+        txtRequestOn = tableRow.findViewById<TextView>(R.id.txtRequestedOn)
+
         tableRow.txtRefNo.setText(trainingHistoryModel.reference_no)
+        tableRow.txtTrainingCourseName.setText(trainingHistoryModel.course_name)
+        tableRow.txtRequestedOn.setText(trainingHistoryModel.request_on)
 
 
         tableRow.setOnClickListener(
@@ -457,5 +480,29 @@ class TrainingFragment : Fragment() {
         }
     }
 
+
+    //  DISPLAY selected leave
+    fun displaySelectedTraining() {
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+
+                //Get selected training ID
+                val M_SHARED_PREFERENCES = "Course"
+                val mPreferences: SharedPreferences = activity!!.getSharedPreferences(M_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+                val selectedtraining = mPreferences.getString("SELECTED_TRAINING", "No training course selected")
+                val show = mPreferences.getString("SHOW_COURSE", "")
+
+                if(show.equals("1")){
+                    txtSelectedTraining!!.setText("Selected course: " + selectedtraining!!.toLowerCase())
+                }
+                else{
+                    txtSelectedTraining!!.setText("Selected course: None ")
+                }
+
+                handler.postDelayed(this, 1000)//1 sec delay
+            }
+        }, 0)
+    }
 
 }

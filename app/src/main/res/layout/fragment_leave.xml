@@ -620,7 +620,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/raleway_regular"
-                                        android:text="Applied on"
+                                        android:text="Applied from"
                                         android:textColor="@color/white" />
 
                                     <TextView
@@ -628,7 +628,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/raleway_regular"
-                                        android:text="Status"
+                                        android:text="Applied to"
                                         android:textColor="@color/white" />
 
                                     <!--<TextView-->

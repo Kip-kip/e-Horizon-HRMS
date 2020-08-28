@@ -34,7 +34,8 @@ public class TrainingCoursesAdapterkt(
         position: Int
     ) {
 
-        val trainingCoursesModel: TrainingCourses.TrainingCoursesModel = dataModelArrayListUsertypes[position]
+        val trainingCoursesModel: TrainingCourses.TrainingCoursesModel =
+            dataModelArrayListUsertypes[position]
         holder.txtCourseName.setText(trainingCoursesModel.short_name)
         holder.txtDesc.setText(trainingCoursesModel.description)
 
@@ -45,16 +46,18 @@ public class TrainingCoursesAdapterkt(
 
         holder.itemView.setOnClickListener {
 
-            // skip code request if already requested
+            //display selected leave
             val preferences: SharedPreferences
-            val MY_SHARED_PREFERENCES = "CourseID"
-            preferences = context.getSharedPreferences(
-                MY_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            )
+            val MY_SHARED_PREFERENCES = "Course"
+            preferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE)
             val editor = preferences.edit()
             editor.putString("COURSE_ID", trainingCoursesModel.id)
+            editor.putString("SELECTED_TRAINING", trainingCoursesModel.short_name)
+            editor.putString("SHOW_COURSE","1")
             editor.commit()
+
+
+
 
 
         }
@@ -74,7 +77,7 @@ public class TrainingCoursesAdapterkt(
 
         init {
             txtCourseName = itemView.findViewById(R.id.txtCourseName)
-            txtDesc= itemView.findViewById(R.id.txtDesc)
+            txtDesc = itemView.findViewById(R.id.txtDesc)
             llCardBody = itemView.findViewById(R.id.cardbody)
 
         }

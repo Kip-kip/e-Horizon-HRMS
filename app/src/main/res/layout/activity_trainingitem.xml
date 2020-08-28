@@ -41,7 +41,7 @@
                 android:id="@+id/profileimage"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_14sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="right"
                 android:scaleType="fitXY"
@@ -123,7 +123,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Course ID: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
                 <TextView
@@ -133,8 +133,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="  2813371"
-                    android:textSize="16sp" />
+                    android:text="  "
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -156,7 +156,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Course Name: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
                 <TextView
@@ -166,8 +166,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="  2813371"
-                    android:textSize="16sp" />
+                    android:text="  "
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -181,25 +181,25 @@
                 android:padding="@dimen/spacing_large">
 
                 <TextView
-                    android:id="@+id/txtEventName"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="Reason: "
-                    android:textSize="16sp" />
+                    android:text="Request type: "
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txtTrainingItemReason"
+                    android:id="@+id/txtTrainingRequestType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="  2813371"
-                    android:textSize="16sp" />
+                    android:text=" "
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -221,7 +221,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="From: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtTrainingItemFrom"
@@ -230,8 +230,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="  2813371"
-                    android:textSize="16sp" />
+                    android:text="  "
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -253,7 +253,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="To: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtTrainingItemTo"
@@ -262,8 +262,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="  2813371"
-                    android:textSize="16sp" />
+                    android:text=" "
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -276,16 +276,6 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:padding="@dimen/spacing_large">
 
-                <TextView
-                    android:id="@+id/txtEventName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/raleway_regular"
-                    android:layout_gravity="center"
-                    android:text="Status:"
-                    android:textSize="16sp" />
 
                 <!--                <Button-->
                 <!--                    android:textStyle="bold"-->

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
+import kotlinx.android.synthetic.main.leavehistory_list_item.*
 import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -39,11 +40,10 @@ class LeaveFragment : Fragment() {
     private var leaveTypeRecyclerView: RecyclerView? = null
     private var leaveTypeAdapter: LeaveTypeAdapter? = null
     private var txtTask: TextView? = null
-    private var txtSDate: TextView? = null
+    private var txtAppliedfrom: TextView? = null
+    private var txtAppliedto: TextView? = null
     private var txtEDate: TextView? = null
 
-    private var txtLeaveTo: EditText? = null
-    private var txtReason: TextView? = null
     var myGlobalString = "initial_value"
     private var txtSelectedLeave: TextView? = null
 
@@ -79,7 +79,7 @@ class LeaveFragment : Fragment() {
 
         val txtLeaveFrom = root.findViewById<EditText>(R.id.txtLeaveFrom)
         val txtLeaveTo = root.findViewById<EditText>(R.id.txtLeaveTo)
-        txtReason = root.findViewById(R.id.txtReason)
+        val txtReason = root.findViewById<EditText>(R.id.txtReason)
         txtSelectedLeave = root.findViewById(R.id.txtSelectedLeave)
 
 
@@ -109,6 +109,14 @@ class LeaveFragment : Fragment() {
             llhistory.visibility = View.VISIBLE
             llencashment.visibility = View.GONE
         }
+
+        //Clear selected Training prefernces
+        val preferences: SharedPreferences
+        val MY_SHARED_PREFERENCES = "CodeRequestPref"
+        preferences = activity!!.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString("SHOW_LEAVE","0")
+        editor.commit()
 
         displaySelectedLeave()
 
@@ -339,12 +347,15 @@ class LeaveFragment : Fragment() {
 
     private fun populateTableLeaveHistory(leaveHistoryModel: LeaveHistory.LeaveHistoryModel): TableRow? {
         val view = view
-        val tableRow = LayoutInflater.from(context)
-            .inflate(R.layout.leavehistory_list_item, null, false) as TableRow
-        // txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
-        txtSDate = tableRow.findViewById<TextView>(R.id.txtSDate)
-        txtEDate = tableRow.findViewById<TextView>(R.id.txtEDate)
+        val tableRow = LayoutInflater.from(context).inflate(R.layout.leavehistory_list_item, null, false) as TableRow
+        txtTask = tableRow.findViewById<TextView>(R.id.txtTask)
+        txtAppliedfrom = tableRow.findViewById<TextView>(R.id.txtAppliedfrom)
+        txtAppliedto = tableRow.findViewById<TextView>(R.id.txtAppliedto)
+
+
         tableRow.txtTask.setText(leaveHistoryModel.leave_name)
+        tableRow.txtAppliedfrom.setText(leaveHistoryModel.applied_from)
+        tableRow.txtAppliedto.setText(leaveHistoryModel.applied_to)
 
 
         tableRow.setOnClickListener(
@@ -397,6 +408,7 @@ class LeaveFragment : Fragment() {
         val code_request_status = mPreferences.getString("SKIP_CODE_REQUEST", "0")
 
 
+
         val token = session!!.token;
 
         val jsonObject = JSONObject()
@@ -444,6 +456,13 @@ class LeaveFragment : Fragment() {
 
 
                                 return
+                            }
+                            else{
+                                Toast.makeText(
+                                    activity,
+                                   "An error occurred while trying to apply for leave",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -494,16 +513,6 @@ class LeaveFragment : Fragment() {
         val handler = Handler()
         handler.postDelayed(object : Runnable {
             override fun run() {
-                //clear shared preferences
-                val preferences: SharedPreferences
-                val MY_SHARED_PREFERENCES = "CodeRequestPref"
-                preferences = context!!.getSharedPreferences(
-                    MY_SHARED_PREFERENCES,
-                    Context.MODE_PRIVATE
-                )
-                val editor = preferences.edit()
-
-                editor.clear()
 
                 //Get selected leave ID
                 val M_SHARED_PREFERENCES = "CodeRequestPref"
@@ -512,7 +521,16 @@ class LeaveFragment : Fragment() {
                     Context.MODE_PRIVATE
                 )
                 val selectedleave = mPreferences.getString("SELECTED_LEAVE", "No leave type selected")
-                txtSelectedLeave!!.setText("Selected leave type: " + selectedleave!!.toLowerCase())
+                val show = mPreferences.getString("SHOW_LEAVE", "")
+
+                if(show.equals("1")){
+                    txtSelectedLeave!!.setText("Selected leave: " + selectedleave!!.toLowerCase())
+                }
+                else{
+                    txtSelectedLeave!!.setText("Selected leave: None ")
+                }
+
+
                 handler.postDelayed(this, 1000)//1 sec delay
             }
         }, 0)

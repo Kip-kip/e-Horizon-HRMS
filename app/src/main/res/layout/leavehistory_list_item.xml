@@ -19,23 +19,23 @@
         android:fontFamily="@font/raleway_regular"
         android:text="Inhouse onboarding" />
     <TextView
-        android:id="@+id/txtSDate"
+        android:id="@+id/txtAppliedfrom"
         android:layout_width="wrap_content"
         android:fontFamily="@font/raleway_regular"
         android:paddingRight="@dimen/_10sdp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="20-09-2019" />
+        android:text="" />
     <TextView
-        android:id="@+id/txtEDate"
+        android:id="@+id/txtAppliedto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/_10sdp"
         android:textColor="@color/black"
         android:layout_weight="1"
         android:fontFamily="@font/raleway_regular"
-        android:text="08:00-10:00" />
+        android:text="" />
 
     <View android:layout_width="match_parent"
         android:backgroundTint="@color/white"

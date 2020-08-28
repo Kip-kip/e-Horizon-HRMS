@@ -74,6 +74,7 @@ public class LeaveTypeAdapter(
             val editor = preferences.edit()
             editor.putString("SKIP_CODE_REQUEST", leavetypeModel.leave_id)
             editor.putString("SELECTED_LEAVE", leavetypeModel.leave_name)
+            editor.putString("SHOW_LEAVE","1")
             editor.commit()
 
         }

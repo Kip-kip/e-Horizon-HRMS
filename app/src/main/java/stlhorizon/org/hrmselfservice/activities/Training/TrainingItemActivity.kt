@@ -31,6 +31,7 @@ class TrainingItemActivity : AppCompatActivity() {
 
         txtCourseID?.setText(traininghistoryModel.course_id+"")
         txtCourseName.setText(traininghistoryModel.course_name+"")
+        txtTrainingRequestType?.setText(traininghistoryModel.request_type+"")
         txtTrainingItemFrom?.setText(traininghistoryModel.probable_period_from+"")
         txtTrainingItemTo?.setText(traininghistoryModel.probable_period_to+"")
 

@@ -123,7 +123,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Leave ID: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLeaveItemLeaveID"
@@ -133,7 +133,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -155,7 +155,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Reason: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLeaveItemReason"
@@ -165,7 +165,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -187,7 +187,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="From: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLeaveItemFrom"
@@ -197,7 +197,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -219,7 +219,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="To: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLeaveItemTo"
@@ -229,7 +229,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
