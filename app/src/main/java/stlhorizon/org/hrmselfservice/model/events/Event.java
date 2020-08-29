@@ -10,10 +10,9 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import stlhorizon.org.hrmselfservice.model.highordermodels.JavaResponse;
 
 
-public class Event extends JavaResponse {
+public class Event  {
     @Expose
     private String message;
     @Expose
@@ -24,7 +23,7 @@ public class Event extends JavaResponse {
         if (this.data != null) {
             for (EventModel eventModel : data) {
 
-                DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+                DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
                 DateTime parsedDateTimeUsingFormatter = DateTime.parse(eventModel.getStart_time(), dateTimeFormatter);
 
                 eventstimestamps.add(parsedDateTimeUsingFormatter.getMillis());

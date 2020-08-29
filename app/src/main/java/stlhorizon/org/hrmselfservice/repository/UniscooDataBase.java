@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import stlhorizon.org.hrmselfservice.model.events.EventModel;
 
 
-@Database(entities = {EventModel.class}, version = 2, exportSchema = false)
+@Database(entities = {EventModel.class}, version = 3, exportSchema = false)
 
 public abstract class UniscooDataBase extends RoomDatabase {
     private static UniscooDataBase uniscooDataBase;

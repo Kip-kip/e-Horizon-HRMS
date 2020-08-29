@@ -43,18 +43,23 @@ public class LeaveTypeAdapter(
         if (leavetypeModel.short_name.equals("COMP")) {
             holder.llCardBody.setBackgroundResource(R.drawable.curve_alledges_pink)
             holder.imgcircle.setBackgroundResource(R.drawable.hug)
+            holder.txtEntitled.setText("30")
         } else if (leavetypeModel.short_name.equals("SICK")) {
             holder.llCardBody.setBackgroundResource(R.drawable.curve_alledges_red)
             holder.imgcircle.setBackgroundResource(R.drawable.headache)
+            holder.txtEntitled.setText("14")
         } else if (leavetypeModel.short_name.equals("PAT")) {
             holder.llCardBody.setBackgroundResource(R.drawable.curve_alledges_yellow)
             holder.imgcircle.setBackgroundResource(R.drawable.pregnancy)
+            holder.txtEntitled.setText("7")
         } else if (leavetypeModel.short_name.equals("MAT")) {
             holder.llCardBody.setBackgroundResource(R.drawable.curve_alledges_blue)
             holder.imgcircle.setBackgroundResource(R.drawable.pregnant)
+            holder.txtEntitled.setText("30")
         } else if (leavetypeModel.short_name.equals("AL")) {
             holder.llCardBody.setBackgroundResource(R.drawable.curve_alledges_green)
             holder.imgcircle.setBackgroundResource(R.drawable.summer)
+            holder.txtEntitled.setText("21")
         }
 
         //style TextView
@@ -90,11 +95,13 @@ public class LeaveTypeAdapter(
         RecyclerView.ViewHolder(itemView) {
         var txtLeaveName: TextView
         var txtBalance: TextView
+        var txtEntitled: TextView
         var llCardBody: LinearLayout
         var imgcircle: CircleImageView
 
         init {
             txtLeaveName = itemView.findViewById(R.id.txtLeaveName)
+            txtEntitled=itemView.findViewById(R.id.txtEntitled)
             txtBalance = itemView.findViewById(R.id.txtBalance)
             llCardBody = itemView.findViewById(R.id.cardbody)
             imgcircle = itemView.findViewById(R.id.imgcircle)

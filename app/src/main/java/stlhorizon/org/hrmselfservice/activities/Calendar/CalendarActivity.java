@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -45,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import stlhorizon.org.hrmselfservice.R;
+import stlhorizon.org.hrmselfservice.activities.Loan.LoanRequestActivity;
 import stlhorizon.org.hrmselfservice.adapter.CalenderEventsAdapter;
 import stlhorizon.org.hrmselfservice.app.EventSourceType;
 import stlhorizon.org.hrmselfservice.customviews.CustomCalenderView;
@@ -52,6 +54,8 @@ import stlhorizon.org.hrmselfservice.helper.SessionManager;
 import stlhorizon.org.hrmselfservice.interfaces.SelectedDayListener;
 import stlhorizon.org.hrmselfservice.model.events.Event;
 import stlhorizon.org.hrmselfservice.model.events.EventModel;
+import stlhorizon.org.hrmselfservice.model.loan.LoanApplication;
+import stlhorizon.org.hrmselfservice.model.spinners.LoanCategory;
 import stlhorizon.org.hrmselfservice.repository.MyEventsDao;
 import stlhorizon.org.hrmselfservice.repository.UniscooDataBase;
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection;
@@ -68,6 +72,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -75,7 +80,7 @@ import static stlhorizon.org.hrmselfservice.app.Config.ROOTURL;
 
 
 public class CalendarActivity extends AppCompatActivity implements OnMonthChangeListener {
-    private ImageView back,refresh;
+    private ImageView back, refresh;
     private Calendar calendar;
     private RecyclerView calendereventsRecyclerView;
     private CalenderEventsAdapter calendereventsAdapter;
@@ -120,7 +125,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     Calendar calendar = day1.getCalendar();
                     Date date = calendar.getTime();
                     android.text.format.DateFormat df = new android.text.format.DateFormat();
-                    CharSequence time = df.format("yyyy-MM-dd", date);
+                    CharSequence time = df.format("yyyy-MM-dd HH:mm:ss", date);
 
                     new EventDaySelected(getApplicationContext()).execute(time.toString());
                 }
@@ -137,7 +142,6 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         calendereventsRecyclerView = findViewById(R.id.calendereventsrecyclerView);
         // session manager
         session = new SessionManager(getApplicationContext());
-
 
 
         //change notification statusbar
@@ -164,7 +168,6 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
             public void onClick(View v) {
 
 
-
                 Intent it = new Intent(getApplicationContext(), CalendarActivity.class);
                 startActivity(it);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
@@ -177,12 +180,11 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
             @Override
             public void onClick(View v) {
 
-                // showAddEventDialog();
+                showAddEventDialog();
 
 
             }
         });
-
 
 
         //LOAD EVENTS FROM UNISCOO API
@@ -190,13 +192,12 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
         //load events from device
         //Get calendar sync status from shared preferences
-        final String MY_SHARED_PREFERENCES = "CalendarSyncPref" ;
-        SharedPreferences myPreferences = getApplicationContext().getSharedPreferences(MY_SHARED_PREFERENCES , MODE_PRIVATE);
+        final String MY_SHARED_PREFERENCES = "CalendarSyncPref";
+        SharedPreferences myPreferences = getApplicationContext().getSharedPreferences(MY_SHARED_PREFERENCES, MODE_PRIVATE);
         String check_status = myPreferences.getString("CAL_CHECK_STATUS", "0");
-        if(check_status.equalsIgnoreCase("1")){
+        if (check_status.equalsIgnoreCase("1")) {
             new GetDeviceCalendarEvents(getApplicationContext()).execute();
-        }
-        else{
+        } else {
 
         }
 
@@ -221,16 +222,17 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
     class CustomMonth {
 
-        public String parseThisMonth(){
-            Calendar cal=Calendar.getInstance();
+        public String parseThisMonth() {
+            Calendar cal = Calendar.getInstance();
             SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
             String month_name = month_date.format(cal.getTime()).toLowerCase();
-            month_name=month_name.substring(0, 1).toUpperCase() + month_name.substring(1);
+            month_name = month_name.substring(0, 1).toUpperCase() + month_name.substring(1);
             SimpleDateFormat year_date = new SimpleDateFormat("YYYY");
             String yearDate = year_date.format(cal.getTime()).toLowerCase();
-            return  this.parse(month_name+" "+yearDate);
+            return this.parse(month_name + " " + yearDate);
 
         }
+
         public String parse(String month) {
             String[] currentMonth = month.split(" ");
             MonthName monthName = MonthName.valueOf(currentMonth[0]);
@@ -262,7 +264,6 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     return currentMonth[1] + "-11" + trail;
                 case December:
                     return currentMonth[1] + "-12" + trail;
-
 
 
                 default:
@@ -299,7 +300,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
     //load events from room database while offline
     private void loadEventsFromRepository(String month) {
-        Log.e("compare",month+"with"+"2019-12-%");
+        Log.e("compare", month + "with" + "2019-12-%");
         new CalendarActivity.MyEventsAsync(getApplicationContext(), Operation.READ, EventSourceType.LOCAL, month).execute();
 
     }
@@ -444,12 +445,12 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     if (response.getString("success").equalsIgnoreCase("1")) {
                         event = Event.createEventFrom(remoteResponse.getMessage());
                         List<EventModel> myEvent = event.getEventData();
-                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
-                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
-                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
+//                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
+//                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
                         //save data to ROOM
-                        //new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.ONLINE).execute(myEvent);
+                        new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.ONLINE).execute(myEvent);
 
 
                         for (DataLoaded dataloade : dataLoaded
@@ -492,236 +493,214 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
     }
 
 
-//    private void showAddEventDialog() {
-//        final Dialog dialog = new Dialog(this);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-//        dialog.setContentView(R.layout.dialog_createevent);
-//        dialog.setCancelable(true);
-//
-//        //declare and instantiate dialog Edit Texts
-//        final EditText txtEName, txtEDesc, txtEStartDate, txtEEndDate;
-//        final Button btnCancel, btnSubmit;
-//        txtEName = dialog.findViewById(R.id.txtEName);
-//        txtEDesc = dialog.findViewById(R.id.txtEDesc);
-//        txtEStartDate = dialog.findViewById(R.id.txtEStartDate);
-//        txtEEndDate = dialog.findViewById(R.id.txtEEndDate);
-//        btnCancel = dialog.findViewById(R.id.btnCancel);
-//        btnSubmit = dialog.findViewById(R.id.btnSubmit);
-//
-//
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        txtEStartDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//                if (hasFocus) {
-//                    txtEStartDate.setText("Tap to enter start date");
-//                }else{
-//
-//                }
-//
-//            }
-//        });
-//
-//        txtEEndDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View view, boolean hasFocus) {
-//                if (hasFocus) {
-//                    txtEEndDate.setText("Tap to enter end date");
-//                }else{
-//
-//                }
-//
-//            }
-//        });
-//
-//        txtEStartDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // Get Current Date
-//                final Calendar c = Calendar.getInstance();
-//                mYear = c.get(Calendar.YEAR);
-//                mMonth = c.get(Calendar.MONTH);
-//                mDay = c.get(Calendar.DAY_OF_MONTH);
-//
-//
-//                DatePickerDialog datePickerDialog = new DatePickerDialog(CalenderActivity.this,
-//                        new DatePickerDialog.OnDateSetListener() {
-//
-//                            @Override
-//                            public void onDateSet(DatePicker view, int year,
-//                                                  int monthOfYear, int dayOfMonth) {
-//                                String monthSelected = String.valueOf(monthOfYear + 1);
-//                                String daySelected = String.valueOf(dayOfMonth);
-//                                String month = monthSelected.length() == 1 ? "0" + monthSelected : monthSelected;
-//                                String day = daySelected.length() == 1 ? "0" + daySelected : daySelected;
-//
-//                                final String date = year + "-" + month + "-" + day;
-//
-//
-//                                TimePickerDialog timePickerDialog = new TimePickerDialog(CalenderActivity.this,
-//                                        new TimePickerDialog.OnTimeSetListener() {
-//
-//                                            @Override
-//                                            public void onTimeSet(TimePicker view, int hourOfDay,
-//                                                                  int minute) {
-//                                                String time = hourOfDay + ":" + minute;
-//
-//                                                txtEStartDate.setText(date + " " + time);
-//
-//
-//                                            }
-//                                        }, hour, minute, false);
-//                                timePickerDialog.show();
-//
-//
-//                            }
-//                        }, mYear, mMonth, mDay);
-//                datePickerDialog.show();
-//
-//            }
-//        });
-//
-//        txtEEndDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // Get Current Date
-//                final Calendar c = Calendar.getInstance();
-//                mYear = c.get(Calendar.YEAR);
-//                mMonth = c.get(Calendar.MONTH);
-//                mDay = c.get(Calendar.DAY_OF_MONTH);
-//
-//
-//                DatePickerDialog datePickerDialog = new DatePickerDialog(CalenderActivity.this,
-//                        new DatePickerDialog.OnDateSetListener() {
-//
-//                            @Override
-//                            public void onDateSet(DatePicker view, int year,
-//                                                  int monthOfYear, int dayOfMonth) {
-//
-//
-//                                String monthSelected = String.valueOf(monthOfYear + 1);
-//                                String daySelected = String.valueOf(dayOfMonth);
-//                                String month = monthSelected.length() == 1 ? "0" + monthSelected : monthSelected;
-//                                String day = daySelected.length() == 1 ? "0" + daySelected : daySelected;
-//
-//                                final String date = year + "-" + month + "-" + day;
-//
-//
-//                                TimePickerDialog timePickerDialog = new TimePickerDialog(CalenderActivity.this,
-//                                        new TimePickerDialog.OnTimeSetListener() {
-//
-//                                            @Override
-//                                            public void onTimeSet(TimePicker view, int hourOfDay,
-//                                                                  int minute) {
-//                                                String time = hourOfDay + ":" + minute;
-//
-//                                                txtEEndDate.setText(date + " " + time);
-//
-//
-//                                            }
-//                                        }, hour, minute, false);
-//                                timePickerDialog.show();
-//
-//
-//                            }
-//                        }, mYear, mMonth, mDay);
-//                datePickerDialog.show();
-//
-//            }
-//        });
-//
-//        btnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                String starttime=txtEStartDate.getText().toString();
-//                String endtime=txtEEndDate.getText().toString();
-//                //getting todays date and time and changing it to string
-//                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//                Date date = new Date();
-//                String todaynow=dateFormat.format(date);
-//
-//                //changing date String to date format for comparison purpose
-//                Date datestart = null;
-//                try {
-//                    datestart = new SimpleDateFormat("MM-dd-yyyy HH:mm").parse(starttime);
-//
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                Date dateend = null;
-//                try {
-//                    dateend = new SimpleDateFormat("MM-dd-yyyy HH:mm").parse(endtime);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                Date datetoday = null;
-//                try {
-//                    datetoday = new SimpleDateFormat("MM-dd-yyyy HH:mm").parse(todaynow);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                //VALIDATE
-//                if(txtEName.getText().toString().equals("")){
-//                    Toast.makeText(getApplicationContext(), "Please enter event name", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(txtEDesc.getText().toString().equals("")){
-//                    Toast.makeText(getApplicationContext(), "Please enter event description", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(txtEStartDate.getText().toString().equals("")){
-//                    Toast.makeText(getApplicationContext(), "Please enter event start date", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(txtEEndDate.getText().toString().equals("")){
-//                    Toast.makeText(getApplicationContext(), "Please enter event end date", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(!(txtEStartDate.getText().toString().substring(0,3)).equals("202")){
-//                    Toast.makeText(getApplicationContext(), "Wrong start date format entered", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(!(txtEEndDate.getText().toString().substring(0,3)).equals("202")){
-//                    Toast.makeText(getApplicationContext(), "Wrong end date format entered", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(datestart.compareTo(dateend)>0){
-//                    Toast.makeText(getApplicationContext(), "End date cannot be lower the start date", Toast.LENGTH_SHORT).show();
-//
-//                }
-////                else if(datetoday.compareTo(datestart)>0){
-////                    Toast.makeText(getApplicationContext(), "You cannot create an event in a date earlier than today", Toast.LENGTH_SHORT).show();
-////
-////                }
-//                else{
-//
-//
-//                    EventModel eventModel = new EventModel();
-//                    eventModel.setE_name(txtEName.getText().toString());
-//                    eventModel.setE_description(txtEDesc.getText().toString());
-//                    eventModel.setS_date(txtEStartDate.getText().toString().substring(0, txtEStartDate.getText().toString().indexOf(' ')));
-//                    eventModel.setE_date(txtEEndDate.getText().toString().substring(0, txtEEndDate.getText().toString().indexOf(' ')));
-//                    eventModel.setS_time(starttime.substring(starttime.length() - 5));
-//                    eventModel.setE_time(endtime.substring(endtime.length() - 5));
-//                    eventModel.setE_status(4000004);
-//                    eventModel.setEventSourceType(0);
-//
-//                    new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.LOCAL).execute(Arrays.asList(eventModel));
-//
-//                    dialog.dismiss();
-//
-//                }
-//
-//
-//            }
-//        });
-//        dialog.show();
-//    }
-//
+    private void showAddEventDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_createevent);
+        dialog.setCancelable(true);
+
+        //declare and instantiate dialog Edit Texts
+        final EditText txtETitle, txtEVenue, txtEType, txtEStartDate, txtEEndDate;
+        final Button btnCancel, btnSubmit;
+        txtETitle = dialog.findViewById(R.id.txtETitle);
+        txtEVenue = dialog.findViewById(R.id.txtEVenue);
+        txtEType = dialog.findViewById(R.id.txtEType);
+        txtEStartDate = dialog.findViewById(R.id.txtEStartDate);
+        txtEEndDate = dialog.findViewById(R.id.txtEEndDate);
+        btnCancel = dialog.findViewById(R.id.btnCancel);
+        btnSubmit = dialog.findViewById(R.id.btnSubmit);
+
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        txtEStartDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    txtEStartDate.setText("Tap to enter start date");
+                } else {
+
+                }
+
+            }
+        });
+
+        txtEEndDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    txtEEndDate.setText("Tap to enter end date");
+                } else {
+
+                }
+
+            }
+        });
+
+        txtEStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Get Current Date
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CalendarActivity.this, R.style.DialogTheme,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                String monthSelected = String.valueOf(monthOfYear + 1);
+                                String daySelected = String.valueOf(dayOfMonth);
+                                String month = monthSelected.length() == 1 ? "0" + monthSelected : monthSelected;
+                                String day = daySelected.length() == 1 ? "0" + daySelected : daySelected;
+
+                                final String date = year + "-" + month + "-" + day;
+
+                                txtEStartDate.setText(date);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+            }
+        });
+
+        txtEEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Get Current Date
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CalendarActivity.this, R.style.DialogTheme,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+
+                                String monthSelected = String.valueOf(monthOfYear + 1);
+                                String daySelected = String.valueOf(dayOfMonth);
+                                String month = monthSelected.length() == 1 ? "0" + monthSelected : monthSelected;
+                                String day = daySelected.length() == 1 ? "0" + daySelected : daySelected;
+
+                                final String date = year + "-" + month + "-" + day;
+
+
+                                txtEEndDate.setText(date);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String token = session.getToken();
+
+                JSONObject jsonObject = new JSONObject();
+                JSONObject headers = new JSONObject();
+                try {
+                    headers.put("Content-Type", "multipart/form-data");
+                    String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+                    jsonObject.put("event_title", txtETitle.getText().toString());
+                    jsonObject.put("start_time", txtEStartDate.getText().toString());
+                    jsonObject.put("end_time", txtEEndDate.getText().toString());
+                    jsonObject.put("created_date", date);
+                    jsonObject.put("venue", txtEVenue.getText().toString());
+                    jsonObject.put("event_type", txtEType.getText().toString());
+                    jsonObject.put("color_code", "");
+
+
+                } catch (JSONException e) {
+
+                }
+                NetworkConnection.makeAPostRequestFormData("https://hrms5.stl-horizon.com/api/web/api/create-event?token=" + token, jsonObject, headers, new OnReceivingResult() {
+                    @Override
+                    public void onErrorResult(IOException e) {
+                        e.printStackTrace();
+
+
+                    }
+
+                    @Override
+                    public void onReceiving100SeriesResponse(RemoteResponse remoteResponse) {
+                    }
+
+                    @Override
+                    public void onReceiving200SeriesResponse(RemoteResponse remoteResponse) {
+                        NetworkConnection.remoteResponseLogger(remoteResponse);
+                        JSONObject response = remoteResponse.getMessangeAsJSON();
+                        Event event=Event.createEventFrom(remoteResponse.getMessage());
+
+                        try {
+                            if (response.getString("success").equalsIgnoreCase("1")) {
+
+                                Toast.makeText(CalendarActivity.this, event.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                dialog.dismiss();
+
+                                return;
+
+
+                            } else {
+                                Toast.makeText(CalendarActivity.this, event.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onReceiving300SeriesResponse(RemoteResponse remoteResponse) {
+                    }
+
+                    @Override
+                    public void onReceiving400SeriesResponse(RemoteResponse remoteResponse) {
+                    }
+
+                    @Override
+                    public void onReceiving500SeriesResponse(RemoteResponse remoteResponse) {
+                    }
+
+                    @Override
+                    public void onAnyEvent() {
+
+                    }
+                });
+
+
+
+            }
+        });
+        dialog.show();
+    }
+
+
+
 
     class GetDeviceCalendarEvents extends AsyncTask<Void, Void, Void> {
 
@@ -839,9 +818,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     calendarView.setCurrentDayIconRes(R.drawable.ic_todaylowericon);
                     calendarView.setConnectedDayIconRes(R.drawable.ic_otherdaylowericon);
                 }
-                calendarView.getConnectedDaysManager().applySettingsToDay(new Day(new Date(2020,01,15)));
+                calendarView.getConnectedDaysManager().applySettingsToDay(new Day(new Date(2020, 01, 15)));
                 calendarView.update();
-                calendarView.getSelectionManager().toggleDay(new Day(new Date(2020,01,15)));
+                calendarView.getSelectionManager().toggleDay(new Day(new Date(2020, 01, 15)));
 
             }
         });
@@ -857,11 +836,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         }, 1000);
 
 
-
-
     }
 
-    public void updateStatusBarColor(String color){// Color must be in hexadecimal fromat
+    public void updateStatusBarColor(String color) {// Color must be in hexadecimal fromat
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

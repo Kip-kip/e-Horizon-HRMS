@@ -36,7 +36,7 @@ public class EventModel implements Serializable {
     private String color_code;
     @ColumnInfo
     @Expose
-    private Long created_date;
+    private String created_date;
     @ColumnInfo
     @Expose
     private Integer created_by;
@@ -104,11 +104,11 @@ public class EventModel implements Serializable {
         this.color_code = color_code;
     }
 
-    public Long getCreated_date() {
+    public String getCreated_date() {
         return created_date;
     }
 
-    public void setCreated_date(Long created_date) {
+    public void setCreated_date(String created_date) {
         this.created_date = created_date;
     }
 
@@ -143,4 +143,3 @@ public class EventModel implements Serializable {
 
 
 }
-
