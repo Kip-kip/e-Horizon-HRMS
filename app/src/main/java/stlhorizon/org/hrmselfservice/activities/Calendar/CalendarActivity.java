@@ -248,6 +248,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     return currentMonth[1] + "-03" + trail;
                 case April:
                     return currentMonth[1] + "-04" + trail;
+
                 case May:
                     return currentMonth[1] + "-05" + trail;
                 case June:
