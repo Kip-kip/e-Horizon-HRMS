@@ -190,6 +190,8 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         //LOAD EVENTS FROM UNISCOO API
         loadCalenderEvents();
 
+
+
         //load events from device
         //Get calendar sync status from shared preferences
         final String MY_SHARED_PREFERENCES = "CalendarSyncPref";
@@ -204,7 +206,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
         //load todays events only
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String formattedDate = df.format(c);
         new EventDaySelected(getApplicationContext()).execute(formattedDate);
 
@@ -359,9 +361,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                             myEventsDao.deleteAllCalenderEvent();
                             break;
                     }
+
                     myEventsDao.insertAllEventModels(eventModel);
                     eventModelsretrieved.addAll(myEventsDao.getEventModels());
-
                     return eventModelsretrieved;
 
 
@@ -416,9 +418,11 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         @Override
         protected void onPostExecute(List<EventModel> eventModels) {
             super.onPostExecute(eventModels);
-            calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), eventModels);
-            calendereventsRecyclerView.setAdapter(calendereventsAdapter);
-            calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+
+//            calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), eventModels);
+//            calendereventsRecyclerView.setAdapter(calendereventsAdapter);
+//            calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         }
     }
@@ -451,7 +455,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 //                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
                         //save data to ROOM
-                        new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.ONLINE).execute(myEvent);
+                        new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.CALENDAR).execute(myEvent);
 
 
                         for (DataLoaded dataloade : dataLoaded
@@ -741,7 +745,7 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
                         //df.format(Long.parseLong(dtStart))
 
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         EventModel eventModel = new EventModel();
                         eventModel.setEvent_title(title);
                         eventModel.setEvent_type(description);
