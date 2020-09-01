@@ -121,11 +121,11 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="Event name:"
+                    android:text="Event name: "
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/txtEventName"
+                    android:id="@+id/txtEventItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -136,6 +136,7 @@
 
 
             </LinearLayout>
+
 
 
             <LinearLayout
@@ -152,7 +153,7 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
-                    android:text="Event type:"
+                    android:text="Event type: "
                     android:textSize="16sp" />
 
                 <TextView

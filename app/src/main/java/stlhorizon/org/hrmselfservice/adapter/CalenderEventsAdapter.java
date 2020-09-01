@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import stlhorizon.org.hrmselfservice.R;
+import stlhorizon.org.hrmselfservice.activities.Calendar.EventItemActivity;
 import stlhorizon.org.hrmselfservice.model.events.EventModel;
 
 public class CalenderEventsAdapter extends RecyclerView.Adapter<CalenderEventsAdapter.MyViewHolder> {
@@ -65,14 +66,12 @@ public class CalenderEventsAdapter extends RecyclerView.Adapter<CalenderEventsAd
             public void onClick(View view) {
 
 
-//                Intent intent = new Intent(CalenderEventsAdapter.this.context, EventItemActivity.class);
-//
-//                intent.putExtra("DETAIL",eventModel.toString());
-//                //indicate where next activity is entered from
-//                intent.putExtra("INDICATOR","Calender");
-//
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
+                Intent intent = new Intent(CalenderEventsAdapter.this.context, EventItemActivity.class);
+
+                intent.putExtra("DETAIL",eventModel.toString());
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
                 //DISLAY SNACK BAR
 

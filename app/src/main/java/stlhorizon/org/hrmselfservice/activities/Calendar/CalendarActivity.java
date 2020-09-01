@@ -355,13 +355,13 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                 case INSERT:
                     switch (this.eventSourceType) {
                         case ONLINE:
-                            myEventsDao.deleteAllOnline();
+
                             break;
                         case CALENDAR:
+                            myEventsDao.deleteAllOnline();
                             myEventsDao.deleteAllCalenderEvent();
                             break;
                     }
-
                     myEventsDao.insertAllEventModels(eventModel);
                     eventModelsretrieved.addAll(myEventsDao.getEventModels());
                     return eventModelsretrieved;
@@ -419,7 +419,6 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         protected void onPostExecute(List<EventModel> eventModels) {
             super.onPostExecute(eventModels);
 
-
 //            calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), eventModels);
 //            calendereventsRecyclerView.setAdapter(calendereventsAdapter);
 //            calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -450,9 +449,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     if (response.getString("success").equalsIgnoreCase("1")) {
                         event = Event.createEventFrom(remoteResponse.getMessage());
                         List<EventModel> myEvent = event.getEventData();
-//                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
-//                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
-//                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
+                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
+                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
                         //save data to ROOM
                         new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.CALENDAR).execute(myEvent);

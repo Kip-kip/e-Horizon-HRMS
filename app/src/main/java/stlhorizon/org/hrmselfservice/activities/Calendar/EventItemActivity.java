@@ -41,7 +41,7 @@ import stlhorizon.org.hrmselfservice.model.events.EventModel;
 public class EventItemActivity extends AppCompatActivity {
     private ImageView back, deleteevent,editevent;
     private String str, string;
-    private TextView ename, edesc, estartdate, esstartdate, eenddate, estarttime, eendtime, evenue, etype,eid;
+    private TextView ename, edesc, estartdate, eenddate, estarttime, eendtime, evenue, etype,eid;
     private Button bookevent;
     private int mYear, mMonth, mDay;
     final Calendar c = Calendar.getInstance();
@@ -56,11 +56,11 @@ public class EventItemActivity extends AppCompatActivity {
 
         //instantiation
         back = findViewById(R.id.back);
-        ename = findViewById(R.id.txtEventName);
+        ename = findViewById(R.id.txtEventItemName);
         estartdate = findViewById(R.id.txtEventStartDate);
         eenddate = findViewById(R.id.txtEventEndDate);
         etype = findViewById(R.id.txtEventType);
-        evenue = findViewById(R.id.txtEVenue);
+        evenue = findViewById(R.id.txtEventVenue);
 
         //redirect to news in page
         back.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +127,8 @@ public class EventItemActivity extends AppCompatActivity {
         }
         //eenddate.setText("End date: " + ds4);
 
-        estarttime.setText("Start date: " +ds2);
-        eendtime.setText("End date: " +ds4);
+        estartdate.setText(ds2);
+        eenddate.setText(ds4);
 
 
 

@@ -216,6 +216,18 @@
         </activity>
 
 
+        <activity
+            android:name=".activities.Calendar.EventItemActivity"
+            android:theme="@style/MyCustomAppTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>
