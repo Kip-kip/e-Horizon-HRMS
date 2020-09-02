@@ -47,6 +47,7 @@ import org.json.JSONObject;
 
 import stlhorizon.org.hrmselfservice.R;
 import stlhorizon.org.hrmselfservice.activities.Loan.LoanRequestActivity;
+import stlhorizon.org.hrmselfservice.activities.MainActivity;
 import stlhorizon.org.hrmselfservice.adapter.CalenderEventsAdapter;
 import stlhorizon.org.hrmselfservice.app.EventSourceType;
 import stlhorizon.org.hrmselfservice.customviews.CustomCalenderView;
@@ -125,9 +126,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     Calendar calendar = day1.getCalendar();
                     Date date = calendar.getTime();
                     android.text.format.DateFormat df = new android.text.format.DateFormat();
-                    CharSequence time = df.format("yyyy-MM-dd HH:mm:ss", date);
-
-                    new EventDaySelected(getApplicationContext()).execute(time.toString());
+                    CharSequence time = df.format("yyyy-MM-dd", date);
+                    String finaldate=time.toString().concat(" 00:00:00");
+                    new EventDaySelected(getApplicationContext()).execute(finaldate);
                 }
 
             }
@@ -153,10 +154,10 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
             public void onClick(View v) {
 
 
-//                Intent it = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(it);
-//                overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
-//                finish();
+                Intent it = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(it);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
+                finish();
 
 
             }
@@ -206,9 +207,11 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
         //load todays events only
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c);
-        new EventDaySelected(getApplicationContext()).execute(formattedDate);
+        String finaldate=formattedDate.concat(" 00:00:00");
+        new EventDaySelected(getApplicationContext()).execute(finaldate);
+
 
 
         //load all events for all months FROM ROOM DB
@@ -419,9 +422,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         protected void onPostExecute(List<EventModel> eventModels) {
             super.onPostExecute(eventModels);
 
-//            calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), eventModels);
-//            calendereventsRecyclerView.setAdapter(calendereventsAdapter);
-//            calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+            calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), eventModels);
+            calendereventsRecyclerView.setAdapter(calendereventsAdapter);
+            calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         }
     }
@@ -449,9 +452,9 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                     if (response.getString("success").equalsIgnoreCase("1")) {
                         event = Event.createEventFrom(remoteResponse.getMessage());
                         List<EventModel> myEvent = event.getEventData();
-                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
-                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
-                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//                        calendereventsAdapter = new CalenderEventsAdapter(getApplicationContext(), myEvent);
+//                        calendereventsRecyclerView.setAdapter(calendereventsAdapter);
+//                        calendereventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
                         //save data to ROOM
                         new MyEventsAsync(getApplicationContext(), Operation.INSERT, EventSourceType.CALENDAR).execute(myEvent);

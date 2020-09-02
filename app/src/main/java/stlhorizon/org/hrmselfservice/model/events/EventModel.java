@@ -40,10 +40,6 @@ public class EventModel implements Serializable {
     @ColumnInfo
     @Expose
     private Integer created_by;
-
-
-
-
     @ColumnInfo
     //1 means online eventsSource and 0 offline
     private Integer eventSourceType=1;
