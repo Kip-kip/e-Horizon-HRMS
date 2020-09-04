@@ -773,10 +773,10 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
 
     @Override
     public void onBackPressed() {
-//        Intent it = new Intent(getApplicationContext(), MainActivity.class);
-//        startActivity(it);
-//        overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
-//        finish();
+        Intent it = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(it);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.nothing);
+        finish();
     }
 
     @Override

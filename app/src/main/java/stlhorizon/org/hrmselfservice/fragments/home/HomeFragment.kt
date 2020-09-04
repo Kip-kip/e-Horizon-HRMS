@@ -10,14 +10,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONException
+import stlhorizon.org.hrmselfservice.FRAGMENT
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.Calendar.CalendarActivity
+import stlhorizon.org.hrmselfservice.activities.MainActivity
 import stlhorizon.org.hrmselfservice.fragments.dashboard.ApprovalsFragment
 import stlhorizon.org.hrmselfservice.fragments.dashboard.LeaveFragment
 import stlhorizon.org.hrmselfservice.fragments.dashboard.PayslipFragment
@@ -25,14 +26,12 @@ import stlhorizon.org.hrmselfservice.fragments.dashboard.ProfileFragment
 import stlhorizon.org.hrmselfservice.fragments.loan.DocsFragment
 import stlhorizon.org.hrmselfservice.fragments.loan.LoanFragment
 import stlhorizon.org.hrmselfservice.fragments.training.TrainingFragment
-import stlhorizon.org.hrmselfservice.helper.SQLiteHandler
 import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.user.Profile
 import stlhorizon.org.hrmselfservice.utils.network.local.NetworkConnection
 import stlhorizon.org.hrmselfservice.utils.network.local.OnReceivingResult
 import stlhorizon.org.hrmselfservice.utils.network.local.RemoteResponse
 import java.io.IOException
-import java.util.*
 
 class HomeFragment : Fragment() {
     private var session: SessionManager? = null
@@ -58,30 +57,38 @@ class HomeFragment : Fragment() {
         //to profile
         profilesection.setOnClickListener {
             replaceFragment(ProfileFragment())
+           MainActivity.Foo.lastFragment = FRAGMENT.PROFILE
         }
 
         leaveapplicationcard.setOnClickListener {
             replaceFragment(LeaveFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.LEAVE
         }
 
         payslipcard.setOnClickListener {
             replaceFragment(PayslipFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.PAYSPLIP
         }
 
         approvalscard.setOnClickListener {
             replaceFragment(ApprovalsFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.APPROVALS
         }
         loanscard.setOnClickListener {
             replaceFragment(LoanFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.LOAN
         }
         docscard.setOnClickListener {
             replaceFragment(DocsFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.DOCS
         }
         trainingcard.setOnClickListener {
             replaceFragment(TrainingFragment())
+            MainActivity.Foo.lastFragment = FRAGMENT.TRAINING
         }
         calendar.setOnClickListener {
             val intent = Intent(activity, CalendarActivity::class.java)
+
             startActivity(intent)
         }
 
@@ -152,5 +159,7 @@ class HomeFragment : Fragment() {
             })
 
     }
+
+
 
 }

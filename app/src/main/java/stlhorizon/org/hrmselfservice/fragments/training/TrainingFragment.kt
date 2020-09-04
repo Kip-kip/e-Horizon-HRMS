@@ -13,13 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_leave.*
 import kotlinx.android.synthetic.main.fragment_leave.tab_layout
 import kotlinx.android.synthetic.main.fragment_training.*
-import kotlinx.android.synthetic.main.trainingcourses_list_item.view.*
-import kotlinx.android.synthetic.main.traininghistory_list_item.*
 import kotlinx.android.synthetic.main.traininghistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -27,10 +26,7 @@ import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.training.TrainingItemActivity
 import stlhorizon.org.hrmselfservice.adapter.TrainingCoursesAdapterkt
 import stlhorizon.org.hrmselfservice.helper.SessionManager
-import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
-import stlhorizon.org.hrmselfservice.model.Leave.LeaveTypes
 import stlhorizon.org.hrmselfservice.model.Training.TrainingHistory
-import stlhorizon.org.hrmselfservice.model.login.LeaveApplicationSuccessResponse
 import stlhorizon.org.hrmselfservice.model.login.LoginErrorResponse
 import stlhorizon.org.hrmselfservice.model.login.TrainingRequestSuccessResponse
 import stlhorizon.org.hrmselfservice.model.training.TrainingCourses
@@ -504,5 +500,8 @@ class TrainingFragment : Fragment() {
             }
         }, 0)
     }
+    
+
+
 
 }

@@ -9,8 +9,10 @@ import android.widget.LinearLayout
 import android.widget.TableRow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import stlhorizon.org.hrmselfservice.FRAGMENT
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
+import stlhorizon.org.hrmselfservice.activities.MainActivity
 import stlhorizon.org.hrmselfservice.activities.Payslip.GroupChatItemActivity
 import stlhorizon.org.hrmselfservice.activities.Payslip.SingleChatItemActivity
 
@@ -35,6 +37,7 @@ class ChatListFragment : Fragment() {
             val intent = Intent(context, GroupChatItemActivity::class.java)
             startActivity(intent)
         }
+        MainActivity.Foo.lastFragment= FRAGMENT.CHATS;
         return root
     }
 }

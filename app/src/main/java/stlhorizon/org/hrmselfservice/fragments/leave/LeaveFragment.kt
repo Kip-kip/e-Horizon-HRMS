@@ -16,12 +16,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_leave.*
-import kotlinx.android.synthetic.main.leavehistory_list_item.*
 import kotlinx.android.synthetic.main.leavehistory_list_item.view.*
 import org.json.JSONException
 import org.json.JSONObject
+import stlhorizon.org.hrmselfservice.FRAGMENT
 import stlhorizon.org.hrmselfservice.R
 import stlhorizon.org.hrmselfservice.activities.Leave.LeaveItemActivity
+import stlhorizon.org.hrmselfservice.activities.MainActivity
 import stlhorizon.org.hrmselfservice.adapter.LeaveTypeAdapter
 import stlhorizon.org.hrmselfservice.helper.SessionManager
 import stlhorizon.org.hrmselfservice.model.Leave.LeaveHistory
@@ -117,6 +118,7 @@ class LeaveFragment : Fragment() {
         val editor = preferences.edit()
         editor.putString("SHOW_LEAVE","0")
         editor.commit()
+
 
         displaySelectedLeave()
 
