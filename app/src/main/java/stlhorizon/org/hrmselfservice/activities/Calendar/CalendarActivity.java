@@ -145,8 +145,6 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
         session = new SessionManager(getApplicationContext());
 
 
-        //change notification statusbar
-        updateStatusBarColor("#546E7A");
 
         //redirect
         back.setOnClickListener(new View.OnClickListener() {
@@ -810,8 +808,8 @@ public class CalendarActivity extends AppCompatActivity implements OnMonthChange
                 calendarView.addConnectedDays(connectedDays);
                 calendarView.setSelectedDayBackgroundColor(getResources().getColor(R.color.red_300));
                 calendarView.setMonthTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                calendarView.setSelectionBarMonthTextColor(getResources().getColor(R.color.red_700));
-                calendarView.setWeekDayTitleTextColor(getResources().getColor(R.color.red_300));
+                calendarView.setSelectionBarMonthTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                calendarView.setWeekDayTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 //calendarView.setWeekendDayTextColor(getResources().getColor(R.color.red_300));
 
 

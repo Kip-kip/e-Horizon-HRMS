@@ -518,10 +518,7 @@ class LeaveFragment : Fragment() {
 
                 //Get selected leave ID
                 val M_SHARED_PREFERENCES = "CodeRequestPref"
-                val mPreferences: SharedPreferences = activity!!.getSharedPreferences(
-                    M_SHARED_PREFERENCES,
-                    Context.MODE_PRIVATE
-                )
+                val mPreferences: SharedPreferences = activity!!.getSharedPreferences(M_SHARED_PREFERENCES, Context.MODE_PRIVATE)
                 val selectedleave = mPreferences.getString("SELECTED_LEAVE", "No leave type selected")
                 val show = mPreferences.getString("SHOW_LEAVE", "")
 

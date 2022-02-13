@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_home.*
+import noman.weekcalendar.WeekCalendar
 import org.json.JSONException
 import stlhorizon.org.hrmselfservice.FRAGMENT
 import stlhorizon.org.hrmselfservice.R
@@ -50,7 +52,7 @@ class HomeFragment : Fragment() {
         val loanscard = root.findViewById<LinearLayout>(R.id.toloan)
         val docscard = root.findViewById<LinearLayout>(R.id.todocs)
         val trainingcard = root.findViewById<LinearLayout>(R.id.totraining)
-        val calendar = root.findViewById<TextView>(R.id.toCalendar)
+        val calendar = root.findViewById<View>(R.id.toCalendar)
         val userimage = root.findViewById<CircleImageView>(R.id.homeuserimage)
         // Session manager
         session = SessionManager(context)

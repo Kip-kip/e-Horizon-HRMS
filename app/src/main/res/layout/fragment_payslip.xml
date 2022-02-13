@@ -100,7 +100,7 @@
         <LinearLayout
             android:id="@+id/changeyear"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
@@ -111,9 +111,9 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_20sdp"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 >
 
@@ -125,7 +125,7 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_30sdp"
+                        android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
 
@@ -140,7 +140,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
@@ -154,7 +154,7 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/raleway_regular"
                         android:text="2019"
-                        android:textSize="18sp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -168,8 +168,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
 
@@ -220,8 +220,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -230,10 +230,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="January"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -254,8 +254,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -264,10 +264,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="February"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -285,8 +285,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -295,10 +295,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="March"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -338,8 +338,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -348,7 +348,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="April"
                         android:textSize="15sp" />
@@ -372,8 +372,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -382,10 +382,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="May"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -403,8 +403,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -413,10 +413,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="June"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -456,8 +456,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -466,10 +466,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="July"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -490,8 +490,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -500,10 +500,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="August"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -521,8 +521,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -531,10 +531,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="September"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -574,8 +574,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -584,10 +584,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="October"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -608,8 +608,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -618,10 +618,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="November"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -639,8 +639,8 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:src="@drawable/pdf"/>
 
                     <TextView
@@ -649,10 +649,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/raleway_regular"
                         android:text="December"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 

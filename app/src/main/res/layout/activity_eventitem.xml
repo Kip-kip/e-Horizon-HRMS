@@ -122,7 +122,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Event name: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtEventItemName"
@@ -132,7 +132,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -154,7 +154,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Event type: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtEventType"
@@ -164,7 +164,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -186,7 +186,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Start date: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtEventStartDate"
@@ -196,7 +196,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -218,7 +218,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="End date: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtEventEndDate"
@@ -228,7 +228,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
@@ -250,7 +250,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text="Venue: "
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtEventVenue"
@@ -260,7 +260,7 @@
                     android:fontFamily="@font/raleway_regular"
                     android:layout_gravity="center"
                     android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
